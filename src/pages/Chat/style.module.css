@@ -1,0 +1,40 @@
+.chat {
+  background: #dbcfe7;
+}
+
+.message {
+  display: flex;
+  margin: 0.5rem 0;
+}
+
+.message.mine {
+  flex-direction: row-reverse;
+}
+
+.message .avatar {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 0.5rem;
+}
+
+.message .bubble {
+  margin: 0;
+  padding: 0.25rem 0.5rem 0.35rem;
+  background-color: skyblue;
+  border-radius: 0.5rem;
+  font-size: 0.85rem;
+  line-height: 1.4;
+  font-weight: 400;
+  height: max-content;
+}
+
+.message.mine .bubble {
+  background-color: lightgreen;
+}
+
+.message .bubble .image {
+  padding: 0.25rem 0 0.15rem;
+  max-width: 100%;
+}
