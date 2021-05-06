@@ -45,9 +45,6 @@ export const RESPONSE_DISPLAY = {
   HIDDEN: "HIDDEN",
 };
 
-/**
- * @returns {[string, () => void]}
- */
 export const useResponseDisplay = ({ type, hideResponseToChat }) => {
   const [displayState, setDisplayState] = useState(
     type === "NO_RESPONSE"
