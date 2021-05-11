@@ -1,19 +1,19 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from 'react';
 import {
   MESSAGE_DISPLAY,
   RESPONSE_DISPLAY,
   useMessageDisplay,
   useResponseDisplay,
   useStoryJson,
-} from "./hooks.js";
-import styles from "./style.module.css";
+} from './hooks.js';
+import styles from './style.module.css';
 
 const MessageResponse = ({ response, pump }) => {
   const [displayState, setResponded] = useResponseDisplay(response);
   const [messageText, setMessageText] = useState(response.confirmText);
 
   useEffect(() => {
-    if (response.type === "NO_RESPONSE") {
+    if (response.type === 'NO_RESPONSE') {
       pump();
     }
   }, []);
@@ -24,7 +24,7 @@ const MessageResponse = ({ response, pump }) => {
 
   if (displayState === RESPONSE_DISPLAY.MESSAGE) {
     return (
-      <div className={[styles.message, styles.mine].join(" ")}>
+      <div className={[styles.message, styles.mine].join(' ')}>
         <p className={styles.bubble}>{messageText}</p>
       </div>
     );
@@ -35,27 +35,31 @@ const MessageResponse = ({ response, pump }) => {
     pump();
   };
 
-  const respondToQuiz = ({ isCorrect }) => () => {
-    if (isCorrect) {
+  const respondToQuiz =
+    ({ isCorrect }) =>
+    () => {
+      if (isCorrect) {
+        setResponded();
+        pump();
+      }
+    };
+
+  const respondToOptions =
+    ({ text, thread }) =>
+    () => {
+      setMessageText(text);
       setResponded();
-      pump();
-    }
-  };
+      pump({ action: 'THREAD_CHANGE', threadId: thread });
+    };
 
-  const respondToOptions = ({ text, thread }) => () => {
-    setMessageText(text);
-    setResponded();
-    pump({ action: "THREAD_CHANGE", threadId: thread });
-  };
-
-  if (response.type === "CONFIRMATION") {
+  if (response.type === 'CONFIRMATION') {
     return (
       <button type="button" onClick={respond}>
         {response.confirmText}
       </button>
     );
   }
-  if (response.type === "QUIZ") {
+  if (response.type === 'QUIZ') {
     return (
       <>
         {response.options?.map((option) => {
@@ -72,7 +76,7 @@ const MessageResponse = ({ response, pump }) => {
       </>
     );
   }
-  if (response.type === "OPTIONS") {
+  if (response.type === 'OPTIONS') {
     return (
       <>
         {response.options?.map((option) => {
@@ -97,8 +101,8 @@ const Message = ({ message, actor, pump }) => {
   const displayState = useMessageDisplay(message);
 
   useEffect(() => {
-    if (message.type === "ACTION_MAIN_THREAD_BACK") {
-      pump({ action: "THREAD_BACK" });
+    if (message.type === 'ACTION_MAIN_THREAD_BACK') {
+      pump({ action: 'THREAD_BACK' });
     }
   }, []);
 
@@ -112,17 +116,17 @@ const Message = ({ message, actor, pump }) => {
 
   let content = <p>Unknown message type: {message.type}</p>;
 
-  if (message.type === "TEXT") {
+  if (message.type === 'TEXT') {
     content = message.text?.length ? (
       <p className={styles.bubble}>{message.text}</p>
     ) : null;
-  } else if (message.type === "IMAGE") {
+  } else if (message.type === 'IMAGE') {
     content = (
       <p className={styles.bubble}>
         <img className={styles.image} src={message.file.thumbUrl} alt="" />
       </p>
     );
-  } else if (message.type === "ACTION_MAIN_THREAD_BACK") {
+  } else if (message.type === 'ACTION_MAIN_THREAD_BACK') {
     content = null;
   }
 
@@ -165,7 +169,7 @@ const MessageThread = ({ story }) => {
   );
 
   const pump = ({ action, threadId } = {}) => {
-    if (action === "THREAD_CHANGE" && threadId) {
+    if (action === 'THREAD_CHANGE' && threadId) {
       const newThread = currentChat.threads.find(
         (thread) => thread._id === threadId
       );
@@ -179,14 +183,14 @@ const MessageThread = ({ story }) => {
           ]);
         }
       }
-    } else if (action === "THREAD_BACK") {
+    } else if (action === 'THREAD_BACK') {
       const newThread = threads[1];
       if (newThread) {
         setThreads((prevThreads) => prevThreads.slice(1));
         const { message: lastMessage } = messages
           .slice()
           .reverse()
-          .find(({ threadId }) => threadId === newThread._id);
+          .find((m) => m.threadId === newThread._id);
         const i = newThread.messages.findIndex(
           (message) => message._id === lastMessage._id
         );
@@ -202,7 +206,7 @@ const MessageThread = ({ story }) => {
       const { message: lastMessage } = messages
         .slice()
         .reverse()
-        .find(({ threadId }) => threadId === currentThread._id);
+        .find((m) => m.threadId === currentThread._id);
       const i = currentThread.messages.findIndex(
         (message) => message._id === lastMessage._id
       );

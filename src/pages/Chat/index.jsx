@@ -1,7 +1,7 @@
-import React from "react";
-import { useLocation, Link } from "react-router-dom";
-import { Story } from "./story.jsx";
-import styles from "./style.module.css";
+import React from 'react';
+import { useLocation, Link } from 'react-router-dom';
+import { Story } from './story.jsx';
+import styles from './style.module.css';
 
 function useQuery() {
   return new URLSearchParams(useLocation().search);
@@ -23,7 +23,7 @@ const StoryList = () => (
 
 export const Chat = () => {
   const query = useQuery();
-  const storyId = query.get("story");
+  const storyId = query.get('story');
 
   return (
     <section className={styles.chat}>

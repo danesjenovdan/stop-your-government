@@ -1,5 +1,17 @@
-node_modules
+# os garbage
 .DS_Store
-dist
-dist-ssr
-*.local
+
+# package manager files
+node_modules/
+*.log
+
+# editor configs
+.idea
+.vscode
+
+# compiled bundles
+dist/
+
+# dotenv
+.env.local
+.env.*.local

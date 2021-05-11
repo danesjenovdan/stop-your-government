@@ -1,14 +1,14 @@
-import { useEffect, useState } from "react";
-import { useFetch } from "use-http";
+import { useEffect, useState } from 'react';
+import { useFetch } from 'use-http';
 
 export const useStoryJson = (id) => {
   return useFetch(`/stories/story-${id}.json`, {}, []);
 };
 
 export const MESSAGE_DISPLAY = {
-  WAITING: "WAITING",
-  WRITING: "WRITING",
-  SHOWN: "SHOWN",
+  WAITING: 'WAITING',
+  WRITING: 'WRITING',
+  SHOWN: 'SHOWN',
 };
 
 const getInitialMessageDisplay = (pauseBefore = 0, timeWriting = 0) => {
@@ -40,14 +40,14 @@ export const useMessageDisplay = ({ pauseBefore = 0, timeWriting = 0 }) => {
 };
 
 export const RESPONSE_DISPLAY = {
-  INTERACTIVE: "INTERACTIVE",
-  MESSAGE: "MESSAGE",
-  HIDDEN: "HIDDEN",
+  INTERACTIVE: 'INTERACTIVE',
+  MESSAGE: 'MESSAGE',
+  HIDDEN: 'HIDDEN',
 };
 
 export const useResponseDisplay = ({ type, hideResponseToChat }) => {
   const [displayState, setDisplayState] = useState(
-    type === "NO_RESPONSE"
+    type === 'NO_RESPONSE'
       ? RESPONSE_DISPLAY.HIDDEN
       : RESPONSE_DISPLAY.INTERACTIVE
   );
