@@ -1,0 +1,14 @@
+@import 'variables';
+
+body {
+  background: $body-bg;
+  color: $body-color;
+}
+
+.container {
+  padding: 0 $gutter;
+}
+
+.strong {
+  font-weight: 700;
+}

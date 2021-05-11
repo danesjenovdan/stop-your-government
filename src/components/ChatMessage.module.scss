@@ -1,0 +1,49 @@
+@import '../assets/css/variables';
+
+.message {
+  display: flex;
+  margin: $gutter 0;
+
+  .avatar {
+    flex: 0 0 3rem;
+    width: 3rem;
+    height: 3rem;
+    margin-right: 0.5rem;
+    border: 2px solid $incoming-chat-bg;
+    border-radius: 50%;
+    background-position: center;
+    background-size: cover;
+  }
+
+  .content {
+    .name {
+      margin: 0 0.25rem 0.15rem;
+      font-size: 0.75rem;
+      font-weight: 500;
+      color: $incoming-chat-name-color;
+    }
+
+    .bubble {
+      padding: 0.4rem 0.85rem 0.5rem;
+      background-color: $incoming-chat-bg;
+      border-radius: 0.75rem;
+      font-size: 0.875rem;
+      line-height: 1.4;
+      font-weight: 400;
+      height: max-content;
+
+      //   .image {
+      //     padding: 0.25rem 0 0.15rem;
+      //     max-width: 100%;
+      //   }
+    }
+  }
+
+  // &.mine {
+  //   flex-direction: row-reverse;
+  // }
+
+  // &.mine .bubble {
+  //   background-color: lightgreen;
+  // }
+}

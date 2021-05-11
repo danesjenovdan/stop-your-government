@@ -1,0 +1,18 @@
+.header {
+  display: flex;
+  border-bottom: 1px solid #000;
+
+  .nav {
+    flex: 1;
+    display: flex;
+
+    a {
+      padding: 0.5rem 1rem;
+      text-decoration: none;
+
+      &.active {
+        background-color: #bdf;
+      }
+    }
+  }
+}

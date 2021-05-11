@@ -1,9 +1,4 @@
 import { useEffect, useState } from 'react';
-import { useFetch } from 'use-http';
-
-export const useStoryJson = (id) => {
-  return useFetch(`/stories/story-${id}.json`, {}, []);
-};
 
 export const MESSAGE_DISPLAY = {
   WAITING: 'WAITING',

@@ -1,0 +1,9 @@
+@import '../assets/css/variables';
+
+.poster {
+  padding-top: 50%;
+  margin-left: -$gutter;
+  margin-right: -$gutter;
+  background-position: center;
+  background-size: cover;
+}
