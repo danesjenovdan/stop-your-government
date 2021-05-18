@@ -24,26 +24,33 @@
     }
 
     .bubble {
-      padding: 0.4rem 0.85rem 0.5rem;
       background-color: $incoming-chat-bg;
       border-radius: 0.75rem;
+      color: $incoming-chat-color;
       font-size: 0.875rem;
       line-height: 1.4;
       font-weight: 400;
       height: max-content;
+      overflow: hidden;
 
-      //   .image {
-      //     padding: 0.25rem 0 0.15rem;
-      //     max-width: 100%;
-      //   }
+      .text {
+        padding: 0.4rem 0.85rem 0.5rem;
+      }
+
+      .image {
+        max-width: 100%;
+      }
     }
   }
 
-  // &.mine {
-  //   flex-direction: row-reverse;
-  // }
+  &.mine {
+    flex-direction: row-reverse;
 
-  // &.mine .bubble {
-  //   background-color: lightgreen;
-  // }
+    .content {
+      .bubble {
+        background-color: $outgoing-chat-bg;
+        color: $outgoing-chat-color;
+      }
+    }
+  }
 }

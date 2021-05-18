@@ -5,8 +5,17 @@ body {
   color: $body-color;
 }
 
+.app {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
 .container {
   padding: 0 $gutter;
+  flex-basis: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
 .strong {

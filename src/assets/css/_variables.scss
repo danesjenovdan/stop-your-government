@@ -3,7 +3,12 @@ $body-color: #333;
 
 $gutter: 0.75rem;
 
+$incoming-chat-color: #333;
 $incoming-chat-bg: hsl(0 0% 85%);
 $incoming-chat-name-color: hsl(0 0% 40%);
 
+$outgoing-chat-color: #fff;
 $outgoing-chat-bg: hsl(0 0% 50%);
+
+$confirm-button-color: #485bff;
+$confirm-button-border-color: $confirm-button-color;

@@ -1,0 +1,20 @@
+@import '../assets/css/variables';
+
+.response {
+  margin: $gutter 0;
+  margin-top: auto;
+
+  .confirmation {
+    text-align: center;
+
+    .button {
+      padding: 0.4rem 0.85rem 0.5rem;
+      border: 2px solid $confirm-button-border-color;
+      border-radius: 0.375rem;
+      background: transparent;
+      color: $confirm-button-color;
+      font-size: 0.875rem;
+      font-weight: 700;
+    }
+  }
+}

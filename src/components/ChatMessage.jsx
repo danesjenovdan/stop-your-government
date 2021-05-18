@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { MESSAGE_DISPLAY, useMessageDisplay } from './chat/hooks.js';
+import { ChatResponse } from './ChatResponse.jsx';
 import styles from './ChatMessage.module.scss';
 
 export const ChatMessage = ({ message, actor, pump }) => {
@@ -16,7 +17,7 @@ export const ChatMessage = ({ message, actor, pump }) => {
   }
 
   if (displayState === MESSAGE_DISPLAY.WRITING) {
-    return <div>...</div>;
+    return <div>...</div>; // TODO: style writing dots/bubbles
   }
 
   const avatar = actor?.avatar?.url ? (
@@ -29,26 +30,29 @@ export const ChatMessage = ({ message, actor, pump }) => {
     <div className={styles.name}>{actor.name}</div>
   ) : null;
 
-  let content = <div>Unknown message type: {message.type}</div>;
-
+  let content;
   if (message.type === 'TEXT') {
     content = message.text?.length ? (
       <div className={styles.content}>
         {name}
-        <div className={styles.bubble}>{message.text}</div>
+        <div className={styles.bubble}>
+          <div className={styles.text}>{message.text}</div>
+        </div>
       </div>
     ) : null;
   } else if (message.type === 'IMAGE') {
-    content = (
+    content = message.file?.url ? (
       <div className={styles.content}>
         {name}
         <div className={styles.bubble}>
           <img className={styles.image} src={message.file.url} alt="" />
         </div>
       </div>
-    );
+    ) : null;
   } else if (message.type === 'ACTION_MAIN_THREAD_BACK') {
     content = null;
+  } else {
+    content = <div>Unknown message type: {message.type}</div>;
   }
 
   return (
@@ -59,11 +63,11 @@ export const ChatMessage = ({ message, actor, pump }) => {
           {content}
         </div>
       )}
-      {/* <Response
+      <ChatResponse
         key={message.response._id}
         response={message.response}
         pump={pump}
-      /> */}
+      />
     </>
   );
 };

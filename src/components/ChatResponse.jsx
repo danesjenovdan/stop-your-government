@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { RESPONSE_DISPLAY, useResponseDisplay } from './hooks.js';
+import classNames from 'classnames';
+import { RESPONSE_DISPLAY, useResponseDisplay } from './chat/hooks.js';
+import msgStyles from './ChatMessage.module.scss';
+import styles from './ChatResponse.module.scss';
 
-const styles = {};
-
-export const Response = ({ response, pump }) => {
+export const ChatResponse = ({ response, pump }) => {
   const [displayState, setResponded] = useResponseDisplay(response);
   const [messageText, setMessageText] = useState(response.confirmText);
 
@@ -19,8 +20,12 @@ export const Response = ({ response, pump }) => {
 
   if (displayState === RESPONSE_DISPLAY.MESSAGE) {
     return (
-      <div className={[styles.message, styles.mine].join(' ')}>
-        <p className={styles.bubble}>{messageText}</p>
+      <div className={classNames(msgStyles.message, msgStyles.mine)}>
+        <div className={msgStyles.content}>
+          <div className={msgStyles.bubble}>
+            <div className={msgStyles.text}>{messageText}</div>
+          </div>
+        </div>
       </div>
     );
   }
@@ -47,15 +52,17 @@ export const Response = ({ response, pump }) => {
       pump({ action: 'THREAD_CHANGE', threadId: thread });
     };
 
+  let content;
   if (response.type === 'CONFIRMATION') {
-    return (
-      <button type="button" onClick={respond}>
-        {response.confirmText}
-      </button>
+    content = (
+      <div className={styles.confirmation}>
+        <button type="button" className={styles.button} onClick={respond}>
+          {response.confirmText}
+        </button>
+      </div>
     );
-  }
-  if (response.type === 'QUIZ') {
-    return (
+  } else if (response.type === 'QUIZ') {
+    content = (
       <>
         {response.options?.map((option) => {
           return (
@@ -70,9 +77,8 @@ export const Response = ({ response, pump }) => {
         })}
       </>
     );
-  }
-  if (response.type === 'OPTIONS') {
-    return (
+  } else if (response.type === 'OPTIONS') {
+    content = (
       <>
         {response.options?.map((option) => {
           return (
@@ -87,7 +93,9 @@ export const Response = ({ response, pump }) => {
         })}
       </>
     );
+  } else {
+    content = <div>Unknown response type: {response.type}</div>;
   }
 
-  return <p>Unknown response type: {response.type}</p>;
+  return <>{!!content && <div className={styles.response}>{content}</div>}</>;
 };
