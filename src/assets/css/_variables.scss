@@ -10,5 +10,11 @@ $incoming-chat-name-color: hsl(0 0% 40%);
 $outgoing-chat-color: #fff;
 $outgoing-chat-bg: hsl(0 0% 50%);
 
+$response-bg: $outgoing-chat-bg;
+$response-color: $outgoing-chat-color;
+
 $confirm-button-color: #485bff;
 $confirm-button-border-color: $confirm-button-color;
+
+$correct-color: #30c28e;
+$incorrect-color: #ffb7b7;

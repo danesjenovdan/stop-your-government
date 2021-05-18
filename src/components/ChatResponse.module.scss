@@ -1,20 +1,62 @@
 @import '../assets/css/variables';
 
 .response {
-  margin: $gutter 0;
   margin-top: auto;
+
+  .button {
+    padding: 0.4rem 0.85rem 0.5rem;
+    border: 2px solid currentColor;
+    border-radius: 0.375rem;
+    background: transparent;
+    color: $confirm-button-color;
+    font-size: 0.875rem;
+    font-weight: 700;
+  }
 
   .confirmation {
     text-align: center;
+    margin-bottom: $gutter;
+  }
 
-    .button {
-      padding: 0.4rem 0.85rem 0.5rem;
-      border: 2px solid $confirm-button-border-color;
-      border-radius: 0.375rem;
-      background: transparent;
-      color: $confirm-button-color;
+  .quiz,
+  .options {
+    margin-left: -$gutter;
+    margin-right: -$gutter;
+    padding: $gutter;
+    background-color: $response-bg;
+    color: $response-color;
+
+    .text {
+      padding-bottom: $gutter;
+      text-align: center;
       font-size: 0.875rem;
       font-weight: 700;
+    }
+
+    .buttons {
+      $gap: 0.25rem;
+
+      padding: $gap;
+      border-radius: 0.375rem;
+      background-color: $body-bg;
+
+      .button {
+        display: block;
+        width: 100%;
+        margin-bottom: $gap;
+
+        &:last-child {
+          margin-bottom: 0;
+        }
+
+        &.correct {
+          color: $correct-color;
+        }
+
+        &.incorrect {
+          color: $incorrect-color;
+        }
+      }
     }
   }
 }

@@ -36,18 +36,26 @@ export const ChatResponse = ({ response, pump }) => {
   };
 
   const respondToQuiz =
-    ({ isCorrect }) =>
+    ({ isCorrect, text, buttonText }) =>
     () => {
+      // TODO: style buttons on wrong selection
       if (isCorrect) {
+        const overrideMessageText = text || buttonText;
+        if (overrideMessageText) {
+          setMessageText(buttonText);
+        }
         setResponded();
         pump();
       }
     };
 
   const respondToOptions =
-    ({ text, thread }) =>
+    ({ thread, text, buttonText }) =>
     () => {
-      setMessageText(text);
+      const overrideMessageText = text || buttonText;
+      if (overrideMessageText) {
+        setMessageText(buttonText);
+      }
       setResponded();
       pump({ action: 'THREAD_CHANGE', threadId: thread });
     };
@@ -63,35 +71,38 @@ export const ChatResponse = ({ response, pump }) => {
     );
   } else if (response.type === 'QUIZ') {
     content = (
-      <>
-        {response.options?.map((option) => {
-          return (
+      <div className={styles.quiz}>
+        <div className={styles.text}>{response.confirmText}</div>
+        <div className={styles.buttons}>
+          {response.options?.map((option) => (
             <button
               key={option._id}
               type="button"
+              className={styles.button}
               onClick={respondToQuiz(option)}
             >
               {option.buttonText}
             </button>
-          );
-        })}
-      </>
+          ))}
+        </div>
+      </div>
     );
   } else if (response.type === 'OPTIONS') {
     content = (
-      <>
-        {response.options?.map((option) => {
-          return (
+      <div className={styles.options}>
+        <div className={styles.buttons}>
+          {response.options?.map((option) => (
             <button
               key={option._id}
               type="button"
+              className={styles.button}
               onClick={respondToOptions(option)}
             >
               {option.buttonText}
             </button>
-          );
-        })}
-      </>
+          ))}
+        </div>
+      </div>
     );
   } else {
     content = <div>Unknown response type: {response.type}</div>;
