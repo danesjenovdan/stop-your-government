@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { ChatMessage } from './ChatMessage.jsx';
 
 export const ChatMessages = ({ story, chat }) => {
@@ -10,6 +10,19 @@ export const ChatMessages = ({ story, chat }) => {
   const [messages, setMessages] = useState(
     initialMessage ? [{ message: initialMessage, threadId: thread._id }] : []
   );
+
+  useEffect(() => {
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        const scroller = document.documentElement;
+        console.log(scroller.scrollHeight);
+        const scroll = scroller.scrollHeight - scroller.clientHeight;
+        console.log(scroll);
+        scroller.scrollTo(0, scroll);
+        // TODO: debounce this and fire it on image loads, etc.
+      });
+    });
+  }, [messages]);
 
   const pump = ({ action, threadId } = {}) => {
     if (action === 'THREAD_CHANGE' && threadId) {
