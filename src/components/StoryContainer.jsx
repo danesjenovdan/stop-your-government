@@ -2,8 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import classNames from 'classnames';
 import { StoryPoster } from './StoryPoster.jsx';
-
-const getChatLink = (storyId, chatId) => `/story?id=${storyId}&chat=${chatId}`;
+import { getChatLink } from '../utils/links.js';
 
 export const StoryContainer = ({ story }) => (
   <>

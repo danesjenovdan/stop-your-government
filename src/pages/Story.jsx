@@ -26,7 +26,7 @@ export const Story = () => {
         if (!chatId || !chat) {
           return <StoryContainer story={story} />;
         }
-        return <ChatContainer story={story} chat={chat} />;
+        return <ChatContainer key={chat._id} story={story} chat={chat} />;
       })()}
     </div>
   );

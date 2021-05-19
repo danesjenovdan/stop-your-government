@@ -5,6 +5,7 @@ import { ChatResponse } from './ChatResponse.jsx';
 import { ImageWithPreview } from './ImageWithPreview.jsx';
 import { TypingIndicator } from './TypingIndicator.jsx';
 import { TriggerChat } from './TriggerChat.jsx';
+import { ReturnFromChat } from './ReturnFromChat.jsx';
 import styles from './ChatMessage.module.scss';
 
 const Avatar = ({ actor }) => {
@@ -31,7 +32,7 @@ const Content = ({ actor, text, image }) => {
   );
 };
 
-export const ChatMessage = ({ message, actor, triggerChat, pump }) => {
+export const ChatMessage = ({ message, actor, triggerChat, story, pump }) => {
   const displayState = useMessageDisplay(message);
   const { maybeScrollToBottom } = useScrollToBottom();
 
@@ -63,12 +64,13 @@ export const ChatMessage = ({ message, actor, triggerChat, pump }) => {
   } else if (message.type === 'ACTION_MAIN_THREAD_BACK') {
     content = null;
   } else if (message.type === 'ACTION' && triggerChat) {
-    content = <TriggerChat chat={triggerChat} />;
+    content = <TriggerChat story={story} chat={triggerChat} />;
+  } else if (message.type === 'ACTION_QUEST_END') {
+    content = <ReturnFromChat story={story} chat={triggerChat} />;
   } else {
     content = <div>Unknown message type: {message.type}</div>;
   }
 
-  // TODO: dont show response if message is still writing
   return (
     <>
       {!!content && (
@@ -77,11 +79,13 @@ export const ChatMessage = ({ message, actor, triggerChat, pump }) => {
           {content}
         </div>
       )}
-      <ChatResponse
-        key={message.response._id}
-        response={message.response}
-        pump={pump}
-      />
+      {displayState === MESSAGE_DISPLAY.SHOWN && (
+        <ChatResponse
+          key={message.response._id}
+          response={message.response}
+          pump={pump}
+        />
+      )}
     </>
   );
 };
