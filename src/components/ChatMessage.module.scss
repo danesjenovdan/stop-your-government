@@ -13,9 +13,12 @@
     border-radius: 50%;
     background-position: center;
     background-size: cover;
+    background-repeat: no-repeat;
   }
 
   .content {
+    max-width: 100%;
+
     .name {
       margin: 0 0.25rem 0.15rem;
       font-size: 0.75rem;
@@ -39,6 +42,8 @@
 
       .image {
         max-width: 100%;
+        min-width: 4rem;
+        min-height: 4rem;
       }
     }
   }

@@ -11,7 +11,7 @@ module.exports = {
   },
   rules: {
     'react/prop-types': ['off'],
-    // 'react/jsx-props-no-spreading': ['off'],
+    'react/jsx-props-no-spreading': ['off'],
     'import/extensions': ['error', 'ignorePackages'],
     'import/prefer-default-export': ['off'],
     'no-underscore-dangle': ['error', { allow: ['_id'] }],

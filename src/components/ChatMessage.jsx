@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { MESSAGE_DISPLAY, useMessageDisplay } from '../utils/chat-hooks.js';
 import { useScrollToBottom } from '../utils/scroll-to-bottom.js';
 import { ChatResponse } from './ChatResponse.jsx';
+import { ImageWithPreview } from './ImageWithPreview.jsx';
 import styles from './ChatMessage.module.scss';
 
 export const ChatMessage = ({ message, actor, pump }) => {
@@ -51,7 +52,7 @@ export const ChatMessage = ({ message, actor, pump }) => {
       <div className={styles.content}>
         {name}
         <div className={styles.bubble}>
-          <img className={styles.image} src={message.file.url} alt="" />
+          <ImageWithPreview image={message.file} className={styles.image} />
         </div>
       </div>
     ) : null;

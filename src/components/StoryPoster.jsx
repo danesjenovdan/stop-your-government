@@ -1,20 +1,11 @@
 import React from 'react';
+import { ImageWithPreview } from './ImageWithPreview.jsx';
 import styles from './StoryPoster.module.scss';
 
 export const StoryPoster = ({ poster }) => {
-  if (poster.type !== 'IMAGE' || !poster.url) {
-    return null;
-  }
-
-  const ratio = (poster.height / poster.width) * 100;
-
   return (
-    <div
-      className={styles.poster}
-      style={{
-        backgroundImage: `url("${poster.url}")`,
-        paddingTop: `${ratio}%`,
-      }}
-    />
+    <div className={styles.poster}>
+      <ImageWithPreview image={poster} className={styles.image} />
+    </div>
   );
 };
