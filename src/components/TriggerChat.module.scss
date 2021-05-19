@@ -1,0 +1,29 @@
+@import '../assets/css/variables';
+
+.triggerChat {
+  background: $action-bg;
+  flex: 1;
+  margin-left: -$gutter;
+  margin-right: -$gutter;
+  padding: $gutter;
+  border-top: 2px solid $action-accent;
+  border-bottom: 2px solid $action-accent;
+
+  .imageContainer {
+    width: 5rem;
+    margin: 0 auto;
+    margin-bottom: $gutter;
+
+    .image {
+      padding-top: 0 !important;
+      width: 5rem !important;
+      height: 5rem;
+      border-radius: 50%;
+      border: 2px solid $action-accent;
+    }
+  }
+
+  .buttonContainer {
+    text-align: center;
+  }
+}

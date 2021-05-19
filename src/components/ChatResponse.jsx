@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import classNames from 'classnames';
 import { RESPONSE_DISPLAY, useResponseDisplay } from '../utils/chat-hooks.js';
 import { useScrollToBottom } from '../utils/scroll-to-bottom.js';
+import { Button } from './Button.jsx';
 import msgStyles from './ChatMessage.module.scss';
 import styles from './ChatResponse.module.scss';
 
@@ -25,6 +26,7 @@ export const ChatResponse = ({ response, pump }) => {
   }
 
   if (displayState === RESPONSE_DISPLAY.MESSAGE) {
+    // TODO: use message content component
     return (
       <div className={classNames(msgStyles.message, msgStyles.mine)}>
         <div className={msgStyles.content}>
@@ -70,9 +72,7 @@ export const ChatResponse = ({ response, pump }) => {
   if (response.type === 'CONFIRMATION') {
     content = (
       <div className={styles.confirmation}>
-        <button type="button" className={styles.button} onClick={respond}>
-          {response.confirmText}
-        </button>
+        <Button onClick={respond}>{response.confirmText}</Button>
       </div>
     );
   } else if (response.type === 'QUIZ') {
@@ -81,14 +81,13 @@ export const ChatResponse = ({ response, pump }) => {
         <div className={styles.text}>{response.confirmText}</div>
         <div className={styles.buttons}>
           {response.options?.map((option) => (
-            <button
+            <Button
               key={option._id}
-              type="button"
               className={styles.button}
               onClick={respondToQuiz(option)}
             >
               {option.buttonText}
-            </button>
+            </Button>
           ))}
         </div>
       </div>
@@ -98,14 +97,13 @@ export const ChatResponse = ({ response, pump }) => {
       <div className={styles.options}>
         <div className={styles.buttons}>
           {response.options?.map((option) => (
-            <button
+            <Button
               key={option._id}
-              type="button"
               className={styles.button}
               onClick={respondToOptions(option)}
             >
               {option.buttonText}
-            </button>
+            </Button>
           ))}
         </div>
       </div>

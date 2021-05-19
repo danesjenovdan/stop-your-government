@@ -4,6 +4,7 @@ import { useScrollToBottom } from '../utils/scroll-to-bottom.js';
 import { ChatResponse } from './ChatResponse.jsx';
 import { ImageWithPreview } from './ImageWithPreview.jsx';
 import { TypingIndicator } from './TypingIndicator.jsx';
+import { TriggerChat } from './TriggerChat.jsx';
 import styles from './ChatMessage.module.scss';
 
 const Avatar = ({ actor }) => {
@@ -30,7 +31,7 @@ const Content = ({ actor, text, image }) => {
   );
 };
 
-export const ChatMessage = ({ message, actor, pump }) => {
+export const ChatMessage = ({ message, actor, triggerChat, pump }) => {
   const displayState = useMessageDisplay(message);
   const { maybeScrollToBottom } = useScrollToBottom();
 
@@ -61,10 +62,13 @@ export const ChatMessage = ({ message, actor, pump }) => {
     ) : null;
   } else if (message.type === 'ACTION_MAIN_THREAD_BACK') {
     content = null;
+  } else if (message.type === 'ACTION' && triggerChat) {
+    content = <TriggerChat chat={triggerChat} />;
   } else {
     content = <div>Unknown message type: {message.type}</div>;
   }
 
+  // TODO: dont show response if message is still writing
   return (
     <>
       {!!content && (

@@ -1,0 +1,11 @@
+@import '../assets/css/variables';
+
+.button {
+  padding: 0.4rem 0.85rem 0.5rem;
+  border: 2px solid currentColor;
+  border-radius: $button-border-radius;
+  background: $body-bg;
+  color: $confirm-button-color;
+  font-size: 0.875rem;
+  font-weight: 700;
+}

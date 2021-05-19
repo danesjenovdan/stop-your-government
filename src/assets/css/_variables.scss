@@ -13,8 +13,13 @@ $outgoing-chat-bg: hsl(0 0% 50%);
 $response-bg: $outgoing-chat-bg;
 $response-color: $outgoing-chat-color;
 
+$button-border-radius: 0.375rem;
+
 $confirm-button-color: #485bff;
 $confirm-button-border-color: $confirm-button-color;
 
 $correct-color: #30c28e;
 $incorrect-color: #ffb7b7;
+
+$action-bg: #06b782;
+$action-accent: #ffd604;

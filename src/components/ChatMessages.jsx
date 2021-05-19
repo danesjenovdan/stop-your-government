@@ -63,11 +63,14 @@ export const ChatMessages = ({ story, chat }) => {
     <>
       {messages?.map(({ message }) => {
         const actor = story.actors.find((a) => a._id === message.actor);
+        const tcid = message.actionOptions?.triggerChatId;
+        const triggerChat = tcid && story.chats.find((c) => c._id === tcid);
         return (
           <ChatMessage
             key={message._id}
             message={message}
             actor={actor}
+            triggerChat={triggerChat}
             pump={pump}
           />
         );
