@@ -1,16 +1,22 @@
 import React, { useEffect } from 'react';
-import { MESSAGE_DISPLAY, useMessageDisplay } from './chat/hooks.js';
+import { MESSAGE_DISPLAY, useMessageDisplay } from '../utils/chat-hooks.js';
+import { useScrollToBottom } from '../utils/scroll-to-bottom.js';
 import { ChatResponse } from './ChatResponse.jsx';
 import styles from './ChatMessage.module.scss';
 
 export const ChatMessage = ({ message, actor, pump }) => {
   const displayState = useMessageDisplay(message);
+  const { maybeScrollToBottom } = useScrollToBottom();
 
   useEffect(() => {
     if (message.type === 'ACTION_MAIN_THREAD_BACK') {
       pump({ action: 'THREAD_BACK' });
     }
   }, []);
+
+  useEffect(() => {
+    maybeScrollToBottom();
+  }, [displayState]);
 
   if (displayState === MESSAGE_DISPLAY.WAITING) {
     return null;

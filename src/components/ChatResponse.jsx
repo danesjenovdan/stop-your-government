@@ -1,18 +1,24 @@
 import React, { useEffect, useState } from 'react';
 import classNames from 'classnames';
-import { RESPONSE_DISPLAY, useResponseDisplay } from './chat/hooks.js';
+import { RESPONSE_DISPLAY, useResponseDisplay } from '../utils/chat-hooks.js';
+import { useScrollToBottom } from '../utils/scroll-to-bottom.js';
 import msgStyles from './ChatMessage.module.scss';
 import styles from './ChatResponse.module.scss';
 
 export const ChatResponse = ({ response, pump }) => {
   const [displayState, setResponded] = useResponseDisplay(response);
   const [messageText, setMessageText] = useState(response.confirmText);
+  const { maybeScrollToBottom } = useScrollToBottom();
 
   useEffect(() => {
     if (response.type === 'NO_RESPONSE') {
       pump();
     }
   }, []);
+
+  useEffect(() => {
+    maybeScrollToBottom();
+  }, [displayState]);
 
   if (displayState === RESPONSE_DISPLAY.HIDDEN) {
     return null;
