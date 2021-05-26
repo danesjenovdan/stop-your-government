@@ -5,7 +5,7 @@ import styles from './StoryPoster.module.scss';
 export const StoryPoster = ({ poster }) => {
   return (
     <div className={styles.poster}>
-      <ImageWithPreview image={poster} className={styles.image} />
+      {!!poster && <ImageWithPreview image={poster} className={styles.image} />}
     </div>
   );
 };
