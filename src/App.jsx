@@ -9,18 +9,20 @@ import { NotFound } from './pages/NotFound.jsx';
 export const App = () => (
   <div className="app">
     <Router>
-      <Header />
       <Switch>
         <Route path="/stories">
+          <Header />
           <Stories />
         </Route>
         <Route path="/story">
+          <Header />
           <Story />
         </Route>
         <Route path="/" exact>
           <Home />
         </Route>
         <Route>
+          <Header />
           <NotFound />
         </Route>
       </Switch>

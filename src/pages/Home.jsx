@@ -1,8 +1,8 @@
 import React from 'react';
+import { Intro } from '../components/Intro.jsx';
 
 export const Home = () => (
   <div className="container">
-    <h1>SYG chat demo</h1>
-    <p>This is the home page.</p>
+    <Intro />
   </div>
 );

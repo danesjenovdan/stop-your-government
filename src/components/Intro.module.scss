@@ -1,0 +1,46 @@
+@import '../assets/css/variables';
+
+.introContainer {
+  margin-left: -$gutter;
+  margin-right: -$gutter;
+  display: flex;
+  flex-direction: column;
+  background-color: #6d5821;
+  height: 100vh;
+  overflow: hidden;
+
+  .introHeight {
+    height: 0;
+    position: relative;
+
+    .intro {
+      position: absolute;
+      inset: 0;
+      background-image: url('../assets/img/intro/intro-1.png');
+      background-position: top center;
+      background-size: 100%;
+      background-repeat: no-repeat;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+
+      .characters {
+        margin: $gutter;
+        background-color: rgba($body-bg, 0.25);
+        height: 15rem;
+      }
+
+      .buttons {
+        margin: $gutter;
+        padding: $gutter;
+        background-color: $body-bg;
+        border: 2px solid currentColor;
+        border-radius: $button-border-radius;
+
+        .selectButton {
+          width: 100%;
+        }
+      }
+    }
+  }
+}
