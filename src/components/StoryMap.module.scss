@@ -6,7 +6,8 @@
   flex: 1;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-end;
+  margin-bottom: 5rem;
   background-color: #496f2a;
 
   .mapHeight {
@@ -44,8 +45,12 @@
 }
 
 .selectedChatInfo {
-  margin-left: -$gutter;
-  margin-right: -$gutter;
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  // margin-left: -$gutter;
+  // margin-right: -$gutter;
   padding: $gutter;
   background-color: $chapter-info-bg;
   display: flex;
