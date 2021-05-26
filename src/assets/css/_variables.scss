@@ -1,14 +1,20 @@
 $body-bg: #fff;
 $body-color: #333;
 
+$gray-15: hsl(0 0% 85%);
+$gray-50: hsl(0 0% 50%);
+$gray-60: hsl(0 0% 40%);
+
+$gold: #ffd604;
+
 $gutter: 0.75rem;
 
 $incoming-chat-color: #333;
-$incoming-chat-bg: hsl(0 0% 85%);
-$incoming-chat-name-color: hsl(0 0% 40%);
+$incoming-chat-bg: $gray-15;
+$incoming-chat-name-color: $gray-60;
 
 $outgoing-chat-color: #fff;
-$outgoing-chat-bg: hsl(0 0% 50%);
+$outgoing-chat-bg: $gray-50;
 
 $response-bg: $outgoing-chat-bg;
 $response-color: $outgoing-chat-color;
@@ -22,4 +28,7 @@ $correct-color: #30c28e;
 $incorrect-color: #ffb7b7;
 
 $action-bg: #06b782;
-$action-accent: #ffd604;
+$action-accent: $gold;
+
+$chapter-info-bg: $gray-15;
+$chapter-info-chapter-color: $gray-60;

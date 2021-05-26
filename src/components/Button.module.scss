@@ -8,4 +8,9 @@
   color: $confirm-button-color;
   font-size: 0.875rem;
   font-weight: 700;
+
+  &.buttonGold {
+    color: $body-color;
+    background-color: $gold;
+  }
 }

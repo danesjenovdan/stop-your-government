@@ -1,6 +1,6 @@
 import React from 'react';
 import { useQuery, useStoryJson } from '../utils/hooks.js';
-import { StoryContainer } from '../components/StoryContainer.jsx';
+import { StoryMap } from '../components/StoryMap.jsx';
 import { ChatContainer } from '../components/ChatContainer.jsx';
 
 export const Story = () => {
@@ -24,7 +24,7 @@ export const Story = () => {
           return <h2>No story loaded!</h2>;
         }
         if (!chatId || !chat) {
-          return <StoryContainer story={story} />;
+          return <StoryMap story={story} />;
         }
         return <ChatContainer key={chat._id} story={story} chat={chat} />;
       })()}
