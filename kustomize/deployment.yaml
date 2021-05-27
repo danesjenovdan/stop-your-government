@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: stopyourgovernment-deployment
+  labels:
+    app: stopyourgovernment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: stopyourgovernment
+  template:
+    metadata:
+      labels:
+        app: stopyourgovernment
+    spec:
+      securityContext:
+        fsGroup: 1000
+      volumes:
+        - name: stopyourgovernment-persistent-storage
+          persistentVolumeClaim:
+            claimName: stopyourgovernment-pvc
+      containers:
+        - name: stopyourgovernment-nginx
+          ports:
+            - name: http
+              containerPort: 80
+              protocol: TCP
+          image: nginx:alpine
+          volumeMounts:
+            - name: stopyourgovernment-persistent-storage
+              mountPath: /usr/share/nginx/html
