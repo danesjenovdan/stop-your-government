@@ -28,8 +28,8 @@ export const Intro = () => {
     }, 1500);
   }, []);
 
-  const width = 1280;
-  const height = 3000;
+  const width = 2560;
+  const height = 6146;
 
   const ratio = (height / width) * 100;
 
@@ -42,7 +42,7 @@ export const Intro = () => {
     <div className={styles.introContainer} ref={scrollerRef}>
       <div className={styles.introHeight} style={{ paddingTop: `${ratio}%` }}>
         <div className={styles.intro}>
-          <div className={styles.characters}>TODO: SHOW CHARACTERS</div>
+          {/* <div className={styles.characters}>TODO: SHOW CHARACTERS</div> */}
           <div className={styles.buttons}>
             <Button
               variant="gold"
