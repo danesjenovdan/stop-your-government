@@ -22,11 +22,8 @@ spec:
             claimName: stopyourgovernment-pvc
       containers:
         - name: stopyourgovernment-nginx
+          image: stopyourgovernment
           ports:
             - name: http
               containerPort: 80
               protocol: TCP
-          image: nginx:alpine
-          volumeMounts:
-            - name: stopyourgovernment-persistent-storage
-              mountPath: /usr/share/nginx/html
