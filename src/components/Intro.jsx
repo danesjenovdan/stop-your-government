@@ -1,13 +1,33 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useSpring } from 'react-spring';
 import { useHistory } from 'react-router-dom';
+import classNames from 'classnames';
 import { Button } from './Button.jsx';
 import styles from './Intro.module.scss';
 import { getStoryLink } from '../utils/links.js';
+import anita from '../assets/img/intro/characters/anita.png';
+import jure from '../assets/img/intro/characters/jure.png';
+import vanja from '../assets/img/intro/characters/vanja.png';
+
+const CHARACTERS = [
+  { id: 'vanja', name: 'Vanja', image: vanja },
+  { id: 'jure', name: 'Jurij', image: jure },
+  { id: 'anita', name: 'Anita', image: anita },
+];
 
 export const Intro = () => {
   const history = useHistory();
   const scrollerRef = useRef();
+  const [selectedCharacter, setSelectedCharacter] = useState(CHARACTERS[1]);
+
+  const currentCharacterIndex = CHARACTERS.indexOf(selectedCharacter);
+  const getNextCharacterIndex =
+    (dir = 1) =>
+    () => {
+      return (
+        (currentCharacterIndex + dir + CHARACTERS.length) % CHARACTERS.length
+      );
+    };
 
   const [, springScroll] = useSpring(() => ({
     y: 0,
@@ -38,12 +58,71 @@ export const Intro = () => {
     history.push(chatLink);
   };
 
+  const selectNextCharacter =
+    (dir = 1) =>
+    () => {
+      setSelectedCharacter(CHARACTERS[getNextCharacterIndex(dir)()]);
+    };
+
   return (
     <div className={styles.introContainer} ref={scrollerRef}>
       <div className={styles.introHeight} style={{ paddingTop: `${ratio}%` }}>
         <div className={styles.intro}>
-          {/* <div className={styles.characters}>TODO: SHOW CHARACTERS</div> */}
+          <div className={styles.characters}>
+            {((character) => (
+              <div className={styles.character}>
+                <img
+                  key={character.name}
+                  style={{ width: '100%' }}
+                  src={character.image}
+                  alt={character.name}
+                />
+              </div>
+            ))(CHARACTERS[getNextCharacterIndex(-1)()])}
+            <div className={classNames(styles.character, styles.selected)}>
+              <img
+                key={selectedCharacter.name}
+                style={{ width: '100%' }}
+                src={selectedCharacter.image}
+                alt={selectedCharacter.name}
+              />
+            </div>
+            {((character) => (
+              <div className={styles.character}>
+                <img
+                  key={character.name}
+                  style={{ width: '100%' }}
+                  src={character.image}
+                  alt={character.name}
+                />
+              </div>
+            ))(CHARACTERS[getNextCharacterIndex(1)()])}
+          </div>
           <div className={styles.buttons}>
+            <div className={styles.character}>
+              <Button
+                className={styles.arrow}
+                onClick={selectNextCharacter(-1)}
+              >
+                <svg viewBox="0 0 88 90" xmlns="http://www.w3.org/2000/svg">
+                  <path
+                    fill="currentColor"
+                    d="M1.75731 40.7574C-0.585838 43.1005 -0.585838 46.8995 1.75731 49.2426L39.9411 87.4264C42.2842 89.7696 46.0832 89.7696 48.4264 87.4264C50.7695 85.0833 50.7695 81.2843 48.4264 78.9411L14.4852 45L48.4264 11.0589C50.7695 8.71573 50.7695 4.91674 48.4263 2.5736C46.0832 0.230449 42.2842 0.23045 39.9411 2.5736L1.75731 40.7574ZM87.0493 39L5.99995 39L5.99995 51L87.0493 51L87.0493 39Z"
+                  />
+                </svg>
+              </Button>
+              <div className={styles.selectedName}>
+                {selectedCharacter.name}
+              </div>
+              <Button className={styles.arrow} onClick={selectNextCharacter(1)}>
+                <svg viewBox="0 0 88 90" xmlns="http://www.w3.org/2000/svg">
+                  <path
+                    fill="currentColor"
+                    d="M85.292 49.2426C87.6352 46.8995 87.6352 43.1005 85.292 40.7574L47.1082 2.57359C44.7651 0.230446 40.9661 0.230446 38.623 2.57359C36.2798 4.91674 36.2798 8.71573 38.623 11.0589L72.5641 45L38.623 78.9411C36.2798 81.2843 36.2798 85.0833 38.623 87.4264C40.9661 89.7696 44.7651 89.7696 47.1082 87.4264L85.292 49.2426ZM0 51H81.0494V39H0L0 51Z"
+                  />
+                </svg>
+              </Button>
+            </div>
             <Button
               variant="gold"
               className={styles.selectButton}
