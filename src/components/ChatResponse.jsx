@@ -3,6 +3,7 @@ import classNames from 'classnames';
 import { RESPONSE_DISPLAY, useResponseDisplay } from '../utils/chat-hooks.js';
 import { useScrollToBottom } from '../utils/scroll-to-bottom.js';
 import { Button } from './Button.jsx';
+import { ImageWithPreview } from './ImageWithPreview.jsx';
 import msgStyles from './ChatMessage.module.scss';
 import styles from './ChatResponse.module.scss';
 
@@ -88,6 +89,23 @@ export const ChatResponse = ({ response, pump }) => {
             >
               {option.buttonText}
             </Button>
+          ))}
+        </div>
+      </div>
+    );
+  } else if (response.type === 'PHOTO_QUIZ') {
+    content = (
+      <div className={styles.quiz}>
+        <div className={styles.text}>{response.confirmText}</div>
+        <div className={classNames(styles.buttons, styles.images)}>
+          {response.photoOptions?.map((option) => (
+            <ImageWithPreview
+              key={option._id}
+              image={option.photo}
+              className={styles.image}
+              style={{ width: '100%' }}
+              onClick={respondToQuiz(option)}
+            />
           ))}
         </div>
       </div>

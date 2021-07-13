@@ -30,6 +30,19 @@
       border-radius: $button-border-radius;
       background-color: $body-bg;
 
+      &.images {
+        display: grid;
+        gap: $gap;
+        grid-template-columns: repeat(2, 1fr);
+
+        .image {
+          max-width: 100%;
+          min-width: 4rem;
+          min-height: 4rem;
+          border-radius: $button-border-radius;
+        }
+      }
+
       .button {
         display: block;
         width: 100%;
