@@ -137,6 +137,23 @@ export const ChatResponse = ({ response, pump }) => {
         </div>
       </div>
     );
+  } else if (response.type === 'SLIDING_PUZZLE') {
+    content = (
+      <div className={styles.quiz}>
+        <div className={styles.text}>
+          {response.confirmText} (NOT IMPLEMENTED CLICK IMAGE TO CONTINUE)
+        </div>
+        <div className={styles.slidingPuzzle}>
+          <ImageWithPreview
+            image={response.photo}
+            // TODO: implement sliding puzzle
+            // className={styles.image}
+            style={{ width: '100%' }}
+            onClick={respond}
+          />
+        </div>
+      </div>
+    );
   } else {
     content = <div>Unknown response type: {response.type}</div>;
   }
