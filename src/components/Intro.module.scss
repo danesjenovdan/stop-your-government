@@ -16,7 +16,7 @@
     .intro {
       position: absolute;
       inset: 0;
-      background-image: url('../assets/img/intro/intro-1-with-chars.png');
+      background-image: url('../assets/img/intro/intro-1.png');
       background-position: top center;
       background-size: 100%;
       background-repeat: no-repeat;
@@ -26,8 +26,14 @@
 
       .characters {
         margin: $gutter;
-        background-color: rgba($body-bg, 0.25);
-        height: 15rem;
+        margin-bottom: 0;
+        height: 17rem;
+        display: grid;
+        grid-template-columns: 1fr 1.5fr 1fr;
+
+        .character {
+          margin: 0 -1rem;
+        }
       }
 
       .buttons {
@@ -37,8 +43,25 @@
         border: 2px solid currentColor;
         border-radius: $button-border-radius;
 
+        .character {
+          display: flex;
+
+          .selectedName {
+            flex: 1;
+            text-align: center;
+            font-size: 1.125rem;
+            font-weight: 700;
+          }
+
+          .arrow {
+            flex: 0 0 3.5rem;
+            color: $body-color;
+          }
+        }
+
         .selectButton {
           width: 100%;
+          margin-top: $gutter;
         }
       }
     }

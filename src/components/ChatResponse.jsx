@@ -3,6 +3,7 @@ import classNames from 'classnames';
 import { RESPONSE_DISPLAY, useResponseDisplay } from '../utils/chat-hooks.js';
 import { useScrollToBottom } from '../utils/scroll-to-bottom.js';
 import { Button } from './Button.jsx';
+import { ImageWithPreview } from './ImageWithPreview.jsx';
 import msgStyles from './ChatMessage.module.scss';
 import styles from './ChatResponse.module.scss';
 
@@ -10,6 +11,8 @@ export const ChatResponse = ({ response, pump }) => {
   const [displayState, setResponded] = useResponseDisplay(response);
   const [messageText, setMessageText] = useState(response.confirmText);
   const { maybeScrollToBottom } = useScrollToBottom();
+
+  const [markedWrongOptions, setMarkedWrongOptions] = useState(new Set());
 
   useEffect(() => {
     if (response.type === 'NO_RESPONSE') {
@@ -44,7 +47,7 @@ export const ChatResponse = ({ response, pump }) => {
   };
 
   const respondToQuiz =
-    ({ isCorrect, text, buttonText }) =>
+    ({ _id, isCorrect, text, buttonText }) =>
     () => {
       // TODO: style buttons on wrong selection
       if (isCorrect) {
@@ -52,8 +55,11 @@ export const ChatResponse = ({ response, pump }) => {
         if (overrideMessageText) {
           setMessageText(buttonText);
         }
+        setMarkedWrongOptions(new Set());
         setResponded();
         pump();
+      } else {
+        setMarkedWrongOptions((prev) => new Set([...prev, _id]));
       }
     };
 
@@ -83,11 +89,34 @@ export const ChatResponse = ({ response, pump }) => {
           {response.options?.map((option) => (
             <Button
               key={option._id}
-              className={styles.button}
+              className={classNames({
+                [styles.button]: true,
+                [styles.incorrect]: markedWrongOptions.has(option._id),
+              })}
               onClick={respondToQuiz(option)}
             >
               {option.buttonText}
             </Button>
+          ))}
+        </div>
+      </div>
+    );
+  } else if (response.type === 'PHOTO_QUIZ') {
+    content = (
+      <div className={styles.quiz}>
+        <div className={styles.text}>{response.confirmText}</div>
+        <div className={classNames(styles.buttons, styles.images)}>
+          {response.photoOptions?.map((option) => (
+            <ImageWithPreview
+              key={option._id}
+              image={option.photo}
+              className={classNames({
+                [styles.image]: true,
+                [styles.incorrect]: markedWrongOptions.has(option._id),
+              })}
+              style={{ width: '100%' }}
+              onClick={respondToQuiz(option)}
+            />
           ))}
         </div>
       </div>
@@ -105,6 +134,23 @@ export const ChatResponse = ({ response, pump }) => {
               {option.buttonText}
             </Button>
           ))}
+        </div>
+      </div>
+    );
+  } else if (response.type === 'SLIDING_PUZZLE') {
+    content = (
+      <div className={styles.quiz}>
+        <div className={styles.text}>
+          {response.confirmText} (NOT IMPLEMENTED CLICK IMAGE TO CONTINUE)
+        </div>
+        <div className={styles.slidingPuzzle}>
+          <ImageWithPreview
+            image={response.photo}
+            // TODO: implement sliding puzzle
+            // className={styles.image}
+            style={{ width: '100%' }}
+            onClick={respond}
+          />
         </div>
       </div>
     );
