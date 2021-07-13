@@ -12,6 +12,8 @@ export const ChatResponse = ({ response, pump }) => {
   const [messageText, setMessageText] = useState(response.confirmText);
   const { maybeScrollToBottom } = useScrollToBottom();
 
+  const [markedWrongOptions, setMarkedWrongOptions] = useState(new Set());
+
   useEffect(() => {
     if (response.type === 'NO_RESPONSE') {
       pump();
@@ -45,7 +47,7 @@ export const ChatResponse = ({ response, pump }) => {
   };
 
   const respondToQuiz =
-    ({ isCorrect, text, buttonText }) =>
+    ({ _id, isCorrect, text, buttonText }) =>
     () => {
       // TODO: style buttons on wrong selection
       if (isCorrect) {
@@ -53,8 +55,11 @@ export const ChatResponse = ({ response, pump }) => {
         if (overrideMessageText) {
           setMessageText(buttonText);
         }
+        setMarkedWrongOptions(new Set());
         setResponded();
         pump();
+      } else {
+        setMarkedWrongOptions((prev) => new Set([...prev, _id]));
       }
     };
 
@@ -84,7 +89,10 @@ export const ChatResponse = ({ response, pump }) => {
           {response.options?.map((option) => (
             <Button
               key={option._id}
-              className={styles.button}
+              className={classNames({
+                [styles.button]: true,
+                [styles.incorrect]: markedWrongOptions.has(option._id),
+              })}
               onClick={respondToQuiz(option)}
             >
               {option.buttonText}
@@ -102,7 +110,10 @@ export const ChatResponse = ({ response, pump }) => {
             <ImageWithPreview
               key={option._id}
               image={option.photo}
-              className={styles.image}
+              className={classNames({
+                [styles.image]: true,
+                [styles.incorrect]: markedWrongOptions.has(option._id),
+              })}
               style={{ width: '100%' }}
               onClick={respondToQuiz(option)}
             />

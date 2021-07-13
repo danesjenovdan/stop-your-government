@@ -40,6 +40,20 @@
           min-width: 4rem;
           min-height: 4rem;
           border-radius: $button-border-radius;
+
+          &.incorrect {
+            &::after {
+              content: '';
+              display: block;
+              position: absolute;
+              inset: 0;
+              background-repeat: no-repeat;
+              background-position: right 0.25em top 0.25em;
+              background-size: 2em 2em;
+              background-color: rgba(255, 255, 255, 0.5);
+              background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20.51 20.51"><path fill="%23#{str-slice("#{$incorrect-color}", 2)}" d="M10.25 0a10.26 10.26 0 10.02 20.52A10.26 10.26 0 0010.25 0zm0 1a9.25 9.25 0 11.02 18.5A9.25 9.25 0 0110.25 1zM5.58 5.7a.5.5 0 00-.38.16.5.5 0 00.04.71l4.3 3.88-4.3 3.88a.5.5 0 00-.04.7.5.5 0 00.7.04l4.38-3.94 4.37 3.94a.5.5 0 00.7-.03.5.5 0 00-.03-.7l-4.3-3.89 4.3-3.88a.5.5 0 00.04-.7.5.5 0 00-.71-.04l-4.37 3.95-4.37-3.95a.5.5 0 00-.33-.13z"/></svg>');
+            }
+          }
         }
       }
 
@@ -47,17 +61,25 @@
         display: block;
         width: 100%;
         margin-bottom: $gap;
+        position: relative;
 
         &:last-child {
           margin-bottom: 0;
         }
 
-        &.correct {
-          color: $correct-color;
-        }
-
         &.incorrect {
           color: $incorrect-color;
+
+          &::after {
+            content: '';
+            display: block;
+            position: absolute;
+            inset: 0;
+            background-repeat: no-repeat;
+            background-position: right 0.25em center;
+            background-size: 2em 2em;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20.51 20.51"><path fill="%23#{str-slice("#{$incorrect-color}", 2)}" d="M10.25 0a10.26 10.26 0 10.02 20.52A10.26 10.26 0 0010.25 0zm0 1a9.25 9.25 0 11.02 18.5A9.25 9.25 0 0110.25 1zM5.58 5.7a.5.5 0 00-.38.16.5.5 0 00.04.71l4.3 3.88-4.3 3.88a.5.5 0 00-.04.7.5.5 0 00.7.04l4.38-3.94 4.37 3.94a.5.5 0 00.7-.03.5.5 0 00-.03-.7l-4.3-3.89 4.3-3.88a.5.5 0 00.04-.7.5.5 0 00-.71-.04l-4.37 3.95-4.37-3.95a.5.5 0 00-.33-.13z"/></svg>');
+          }
         }
       }
     }
