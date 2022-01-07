@@ -9,6 +9,9 @@ body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  // temp: force mobile width
+  max-width: 540px;
+  margin: 0 auto;
 }
 
 .container {

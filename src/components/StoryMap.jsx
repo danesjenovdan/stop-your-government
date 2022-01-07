@@ -14,7 +14,7 @@ import scienceInstitute from '../assets/img/map/selected-science-institute.png';
 const MAP_ICONS = [
   {
     key: 'government',
-    chatId: '60ab894f8da3c73194005a41',
+    chatId: '61c0b777fb3f79442dd495b1',
     image: government,
     width: '29%',
     top: '42.25%',
@@ -30,7 +30,7 @@ const MAP_ICONS = [
   },
   {
     key: 'media house',
-    chatId: '60ab89408da3c73194005a3a',
+    chatId: '61d08f7dfb3f79442d26b3b3',
     image: mediaHouse,
     width: '16.5%',
     top: '35%',
@@ -46,7 +46,7 @@ const MAP_ICONS = [
   },
   {
     key: 'protected land',
-    chatId: '60ab89fc8da3c73194005b06',
+    chatId: '61d0b8defb3f79442d593daf',
     image: protectedLand,
     width: '19.5%',
     top: '23%',
@@ -54,7 +54,7 @@ const MAP_ICONS = [
   },
   {
     key: 'science institute',
-    chatId: '60ab87c48da3c7319400580c',
+    chatId: '61c0bdd9fb3f79442dd6f7f8',
     image: scienceInstitute,
     width: '20.5%',
     top: '56%',
