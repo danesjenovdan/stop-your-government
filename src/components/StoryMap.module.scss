@@ -54,6 +54,9 @@
   padding: $gutter;
   background-color: $chapter-info-bg;
   display: flex;
+  // temp: force mobile width
+  max-width: 540px;
+  margin: 0 auto;
 
   .text {
     flex: 1;
