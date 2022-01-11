@@ -14,9 +14,11 @@ export const TriggerChat = ({ story, chat }) => {
 
   return (
     <div className={styles.triggerChat}>
-      <div className={styles.imageContainer}>
-        <ImageWithPreview image={chat.poster} className={styles.image} />
-      </div>
+      {!!chat?.poster && (
+        <div className={styles.imageContainer}>
+          <ImageWithPreview image={chat.poster} className={styles.image} />
+        </div>
+      )}
       <div className={styles.buttonContainer}>
         <Button onClick={onClick}>{chat.title}</Button>
       </div>
