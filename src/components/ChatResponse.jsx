@@ -7,7 +7,7 @@ import { ImageWithPreview } from './ImageWithPreview.jsx';
 import msgStyles from './ChatMessage.module.scss';
 import styles from './ChatResponse.module.scss';
 
-export const ChatResponse = ({ response, pump }) => {
+export const ChatResponse = ({ response, threadId, pump }) => {
   const [displayState, setResponded] = useResponseDisplay(response);
   const [messageText, setMessageText] = useState(response.confirmText);
   const { maybeScrollToBottom } = useScrollToBottom();
@@ -71,7 +71,11 @@ export const ChatResponse = ({ response, pump }) => {
         setMessageText(buttonText);
       }
       setResponded();
-      pump({ action: 'THREAD_CHANGE', threadId: thread });
+      if (threadId !== thread) {
+        pump({ action: 'THREAD_CHANGE', threadId: thread });
+      } else {
+        pump();
+      }
     };
 
   let content;
