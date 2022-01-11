@@ -32,12 +32,22 @@ const Content = ({ actor, text, image }) => {
   );
 };
 
-export const ChatMessage = ({ message, actor, triggerChat, story, pump }) => {
+export const ChatMessage = ({
+  message,
+  actor,
+  triggerChat,
+  story,
+  threadId,
+  pump,
+}) => {
   const displayState = useMessageDisplay(message);
   const { maybeScrollToBottom } = useScrollToBottom();
 
   useEffect(() => {
-    if (message.type === 'ACTION_MAIN_THREAD_BACK') {
+    if (
+      message.type === 'ACTION_MAIN_THREAD_BACK' ||
+      message.type === 'ACTION_THREAD_BACK'
+    ) {
       pump({ action: 'THREAD_BACK' });
     }
   }, []);
@@ -47,6 +57,13 @@ export const ChatMessage = ({ message, actor, triggerChat, story, pump }) => {
   }, [displayState]);
 
   if (displayState === MESSAGE_DISPLAY.WAITING) {
+    return null;
+  }
+
+  if (
+    message.type === 'ACTION_MAIN_THREAD_BACK' ||
+    message.type === 'ACTION_THREAD_BACK'
+  ) {
     return null;
   }
 
@@ -61,8 +78,6 @@ export const ChatMessage = ({ message, actor, triggerChat, story, pump }) => {
     content = message.file?.url ? (
       <Content actor={actor} image={message.file} />
     ) : null;
-  } else if (message.type === 'ACTION_MAIN_THREAD_BACK') {
-    content = null;
   } else if (message.type === 'ACTION' && triggerChat) {
     content = <TriggerChat story={story} chat={triggerChat} />;
   } else if (message.type === 'ACTION_QUEST_END') {
@@ -83,6 +98,7 @@ export const ChatMessage = ({ message, actor, triggerChat, story, pump }) => {
         <ChatResponse
           key={message.response._id}
           response={message.response}
+          threadId={threadId}
           pump={pump}
         />
       )}
