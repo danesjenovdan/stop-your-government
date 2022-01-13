@@ -6,5 +6,6 @@ export function useQuery() {
 }
 
 export const useStoryJson = (id) => {
-  return useFetch(`/stories/story-${id}.json`, {}, []);
+  const cacheBust = Date.now().toString(36);
+  return useFetch(`/stories/story-${id}.json?_c=${cacheBust}`, {}, []);
 };

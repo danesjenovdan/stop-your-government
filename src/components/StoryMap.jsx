@@ -14,7 +14,7 @@ import scienceInstitute from '../assets/img/map/selected-science-institute.png';
 const MAP_ICONS = [
   {
     key: 'government',
-    chatId: '61c0b777fb3f79442dd495b1',
+    chatId: '61c0bdd9fb3f79442dd6f7f8',
     image: government,
     width: '29%',
     top: '42.25%',
@@ -54,7 +54,7 @@ const MAP_ICONS = [
   },
   {
     key: 'science institute',
-    chatId: '61c0bdd9fb3f79442dd6f7f8',
+    chatId: '61c0b777fb3f79442dd495b1',
     image: scienceInstitute,
     width: '20.5%',
     top: '56%',
