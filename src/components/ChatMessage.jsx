@@ -8,6 +8,36 @@ import { TriggerChat } from './TriggerChat.jsx';
 import { ReturnFromChat } from './ReturnFromChat.jsx';
 import styles from './ChatMessage.module.scss';
 
+function parseCustomCommand(text) {
+  let commandText = (text || '').trim();
+  if (!commandText.startsWith('#split')) {
+    return {};
+  }
+  commandText = commandText.replace(/^#split/i, '').trim();
+  const matches = commandText
+    .split(/\n+/g)
+    .map((command) => command.trim())
+    .filter(Boolean)
+    .map((command) =>
+      command.match(/([a-z_][a-z_ ]*?)\s*([>=<])\s*(\d+)\s*=\s*"?([^"]+)"?/i)
+    );
+  const storage = JSON.parse(localStorage.getItem('variables') || '{}');
+  const validMatch = matches.find(([, key, operation, number]) => {
+    const value = storage[key] || 0;
+    if (operation === '>') {
+      return value > Number(number);
+    }
+    if (operation === '<') {
+      return value < Number(number);
+    }
+    return false;
+  });
+  if (validMatch) {
+    return { action: 'THREAD_CHANGE', threadName: validMatch[4] };
+  }
+  return {};
+}
+
 const Avatar = ({ actor }) => {
   if (!actor?.avatar?.url) {
     return null;
@@ -43,12 +73,22 @@ export const ChatMessage = ({
   const displayState = useMessageDisplay(message);
   const { maybeScrollToBottom } = useScrollToBottom();
 
+  const messageType = message.text?.trim().startsWith('#')
+    ? 'CUSTOM_COMMAND'
+    : message.type;
+
   useEffect(() => {
     if (
-      message.type === 'ACTION_MAIN_THREAD_BACK' ||
-      message.type === 'ACTION_THREAD_BACK'
+      messageType === 'ACTION_MAIN_THREAD_BACK' ||
+      messageType === 'ACTION_THREAD_BACK'
     ) {
       pump({ action: 'THREAD_BACK' });
+    }
+    if (messageType === 'CUSTOM_COMMAND') {
+      const { action, threadName } = parseCustomCommand(message.text);
+      if (action === 'THREAD_CHANGE' && threadName) {
+        pump({ action, threadName });
+      }
     }
   }, []);
 
@@ -61,8 +101,9 @@ export const ChatMessage = ({
   }
 
   if (
-    message.type === 'ACTION_MAIN_THREAD_BACK' ||
-    message.type === 'ACTION_THREAD_BACK'
+    messageType === 'ACTION_MAIN_THREAD_BACK' ||
+    messageType === 'ACTION_THREAD_BACK' ||
+    messageType === 'CUSTOM_COMMAND'
   ) {
     return null;
   }
@@ -70,20 +111,20 @@ export const ChatMessage = ({
   let content;
   if (displayState === MESSAGE_DISPLAY.WRITING) {
     content = <Content actor={actor} text={<TypingIndicator />} />;
-  } else if (message.type === 'TEXT') {
+  } else if (messageType === 'TEXT') {
     content = message.text?.length ? (
       <Content actor={actor} text={message.text} />
     ) : null;
-  } else if (message.type === 'IMAGE') {
+  } else if (messageType === 'IMAGE') {
     content = message.file?.url ? (
       <Content actor={actor} image={message.file} />
     ) : null;
-  } else if (message.type === 'ACTION' && triggerChat) {
+  } else if (messageType === 'ACTION' && triggerChat) {
     content = <TriggerChat story={story} chat={triggerChat} />;
-  } else if (message.type === 'ACTION_QUEST_END') {
+  } else if (messageType === 'ACTION_QUEST_END') {
     content = <ReturnFromChat story={story} chat={triggerChat} />;
   } else {
-    content = <div>Unknown message type: {message.type}</div>;
+    content = <div>Unknown message type: {messageType}</div>;
   }
 
   return (

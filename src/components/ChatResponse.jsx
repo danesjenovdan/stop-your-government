@@ -7,6 +7,28 @@ import { ImageWithPreview } from './ImageWithPreview.jsx';
 import msgStyles from './ChatMessage.module.scss';
 import styles from './ChatResponse.module.scss';
 
+function updateVariables(text) {
+  let commandText = (text || '').trim();
+  if (!commandText.startsWith('#variable')) {
+    return;
+  }
+  commandText = commandText.replace(/^#variable/i, '').trim();
+  const matches = [
+    ...commandText.matchAll(/([a-z_][a-z_ ]*?)\s*([+-])\s*(\d+)/gi),
+  ];
+  const storage = JSON.parse(localStorage.getItem('variables') || '{}');
+  matches.forEach(([, key, operation, number]) => {
+    let value = storage[key] || 0;
+    if (operation === '+') {
+      value += Number(number);
+    } else if (operation === '-') {
+      value -= Number(number);
+    }
+    storage[key] = value;
+  });
+  localStorage.setItem('variables', JSON.stringify(storage));
+}
+
 export const ChatResponse = ({ response, threadId, pump }) => {
   const [displayState, setResponded] = useResponseDisplay(response);
   const [messageText, setMessageText] = useState(response.confirmText);
@@ -66,6 +88,7 @@ export const ChatResponse = ({ response, threadId, pump }) => {
   const respondToOptions =
     ({ thread, text, buttonText }) =>
     () => {
+      updateVariables(text);
       const overrideMessageText = text || buttonText;
       if (overrideMessageText) {
         setMessageText(buttonText);

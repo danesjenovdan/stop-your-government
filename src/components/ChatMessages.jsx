@@ -11,9 +11,14 @@ export const ChatMessages = ({ story, chat }) => {
     initialMessage ? [{ message: initialMessage, threadId: thread._id }] : []
   );
 
-  const pump = ({ action, threadId } = {}) => {
-    if (action === 'THREAD_CHANGE' && threadId) {
-      const newThread = chat.threads.find((t) => t._id === threadId);
+  const pump = ({ action, threadId, threadName } = {}) => {
+    if (action === 'THREAD_CHANGE' && (threadId || threadName)) {
+      let newThread = null;
+      if (threadId) {
+        newThread = chat.threads.find((t) => t._id === threadId);
+      } else if (threadName) {
+        newThread = chat.threads.find((t) => t.name === threadName);
+      }
       if (newThread) {
         setThreads((prevThreads) => [newThread, ...prevThreads]);
         const nextMessage = newThread.messages[0];
