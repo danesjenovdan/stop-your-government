@@ -10,6 +10,9 @@ export const Stories = () => (
         <Link to="/story?id=60866bc48da3c7319440cd2c">Demo story</Link>
       </li>
       <li>
+        <Link to="/story?id=61c31d6dfb3f79442dd89099">Variables test</Link>
+      </li>
+      <li>
         <Link to="/story?id=doesntexist">Non-existent story</Link>
       </li>
     </ul>
