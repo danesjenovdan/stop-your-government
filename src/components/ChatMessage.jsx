@@ -18,22 +18,38 @@ function parseCustomCommand(text) {
     .split(/\n+/g)
     .map((command) => command.trim())
     .filter(Boolean)
-    .map((command) =>
-      command.match(/([a-z_][a-z_ ]*?)\s*([>=<])\s*(\d+)\s*=\s*"?([^"]+)"?/i)
-    );
+    .map((command) => {
+      let [input, result] = command.split('=').map((s) => s.trim());
+      result = result.replace(/^"/, '').replace(/"$/, '');
+      input = input
+        .split('&')
+        .map((s) => s.trim())
+        .map((s) => {
+          const [, key, op, value] = s.match(
+            /([a-z_][a-z_ ]*)\s*([>=<])\s*([0-9a-z_][0-9a-z_ ]*)/i
+          );
+          return [key.trim(), op, value.trim()];
+        });
+      return { input, result };
+    });
   const storage = JSON.parse(localStorage.getItem('variables') || '{}');
-  const validMatch = matches.find(([, key, operation, number]) => {
-    const value = storage[key] || 0;
-    if (operation === '>') {
-      return value > Number(number);
-    }
-    if (operation === '<') {
-      return value < Number(number);
-    }
-    return false;
+  const validMatch = matches.find(({ input }) => {
+    return input.every(([key, op, value]) => {
+      const leftValue = storage[key] || 0;
+      const rightValue = Number.isNaN(Number(value))
+        ? storage[value] || 0
+        : Number(value);
+      if (op === '>') {
+        return leftValue > rightValue;
+      }
+      if (op === '<') {
+        return leftValue < rightValue;
+      }
+      return false;
+    });
   });
   if (validMatch) {
-    return { action: 'THREAD_CHANGE', threadName: validMatch[4] };
+    return { action: 'THREAD_CHANGE', threadName: validMatch.result };
   }
   return {};
 }
