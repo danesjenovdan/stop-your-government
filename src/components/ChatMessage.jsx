@@ -26,7 +26,7 @@ function parseCustomCommand(text) {
         .map((s) => s.trim())
         .map((s) => {
           const [, key, op, value] = s.match(
-            /([a-z_][a-z_ ]*)\s*([>=<])\s*([0-9a-z_][0-9a-z_ ]*)/i
+            /([a-z_][a-z_ ]*)\s*([>=<])\s*([0-9a-z_-][0-9a-z_ ]*)/i
           );
           return [key.trim(), op, value.trim()];
         });
