@@ -15,6 +15,9 @@ export const Stories = () => (
       <li>
         <Link to="/story?id=doesntexist">Non-existent story</Link>
       </li>
+      <li>
+        <Link to="/story?id=6273f6cffb3f79442df97278">HRV</Link>
+      </li>
     </ul>
   </div>
 );
