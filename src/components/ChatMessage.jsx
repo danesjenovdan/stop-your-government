@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { MESSAGE_DISPLAY, useMessageDisplay } from '../utils/chat-hooks.js';
 import { useScrollToBottom } from '../utils/scroll-to-bottom.js';
-import { ChatResponse } from './ChatResponse.jsx';
+import { ChatResponse, updateVariables } from './ChatResponse.jsx';
 import { ImageWithPreview } from './ImageWithPreview.jsx';
 import { TypingIndicator } from './TypingIndicator.jsx';
 import { TriggerChat } from './TriggerChat.jsx';
@@ -93,6 +93,8 @@ export const ChatMessage = ({
     ? 'CUSTOM_COMMAND'
     : message.type;
 
+  const { action, threadName } = parseCustomCommand(message.text);
+
   useEffect(() => {
     if (
       messageType === 'ACTION_MAIN_THREAD_BACK' ||
@@ -101,7 +103,7 @@ export const ChatMessage = ({
       pump({ action: 'THREAD_BACK' });
     }
     if (messageType === 'CUSTOM_COMMAND') {
-      const { action, threadName } = parseCustomCommand(message.text);
+      updateVariables(message.text);
       if (action === 'THREAD_CHANGE' && threadName) {
         pump({ action, threadName });
       }
@@ -118,10 +120,15 @@ export const ChatMessage = ({
 
   if (
     messageType === 'ACTION_MAIN_THREAD_BACK' ||
-    messageType === 'ACTION_THREAD_BACK' ||
-    messageType === 'CUSTOM_COMMAND'
+    messageType === 'ACTION_THREAD_BACK'
   ) {
     return null;
+  }
+
+  if (messageType === 'CUSTOM_COMMAND') {
+    if (action === 'THREAD_CHANGE' && threadName) {
+      return null;
+    }
   }
 
   let content;
@@ -139,6 +146,8 @@ export const ChatMessage = ({
     content = <TriggerChat story={story} chat={triggerChat} />;
   } else if (messageType === 'ACTION_QUEST_END') {
     content = <ReturnFromChat story={story} chat={triggerChat} />;
+  } else if (messageType === 'CUSTOM_COMMAND') {
+    content = null;
   } else {
     content = <div>Unknown message type: {messageType}</div>;
   }
