@@ -7,7 +7,7 @@ import { ImageWithPreview } from './ImageWithPreview.jsx';
 import msgStyles from './ChatMessage.module.scss';
 import styles from './ChatResponse.module.scss';
 
-function updateVariables(text) {
+export function updateVariables(text) {
   let commandText = (text || '').trim();
   if (!commandText.startsWith('#variable')) {
     return;

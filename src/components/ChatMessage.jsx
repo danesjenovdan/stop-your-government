@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { MESSAGE_DISPLAY, useMessageDisplay } from '../utils/chat-hooks.js';
 import { useScrollToBottom } from '../utils/scroll-to-bottom.js';
-import { ChatResponse } from './ChatResponse.jsx';
+import { ChatResponse, updateVariables } from './ChatResponse.jsx';
 import { ImageWithPreview } from './ImageWithPreview.jsx';
 import { TypingIndicator } from './TypingIndicator.jsx';
 import { TriggerChat } from './TriggerChat.jsx';
@@ -103,6 +103,7 @@ export const ChatMessage = ({
       pump({ action: 'THREAD_BACK' });
     }
     if (messageType === 'CUSTOM_COMMAND') {
+      updateVariables(message.text);
       if (action === 'THREAD_CHANGE' && threadName) {
         pump({ action, threadName });
       }
