@@ -93,6 +93,8 @@ export const ChatMessage = ({
     ? 'CUSTOM_COMMAND'
     : message.type;
 
+  const { action, threadName } = parseCustomCommand(message.text);
+
   useEffect(() => {
     if (
       messageType === 'ACTION_MAIN_THREAD_BACK' ||
@@ -101,7 +103,6 @@ export const ChatMessage = ({
       pump({ action: 'THREAD_BACK' });
     }
     if (messageType === 'CUSTOM_COMMAND') {
-      const { action, threadName } = parseCustomCommand(message.text);
       if (action === 'THREAD_CHANGE' && threadName) {
         pump({ action, threadName });
       }
@@ -118,10 +119,15 @@ export const ChatMessage = ({
 
   if (
     messageType === 'ACTION_MAIN_THREAD_BACK' ||
-    messageType === 'ACTION_THREAD_BACK' ||
-    messageType === 'CUSTOM_COMMAND'
+    messageType === 'ACTION_THREAD_BACK'
   ) {
     return null;
+  }
+
+  if (messageType === 'CUSTOM_COMMAND') {
+    if (action === 'THREAD_CHANGE' && threadName) {
+      return null;
+    }
   }
 
   let content;
@@ -139,6 +145,8 @@ export const ChatMessage = ({
     content = <TriggerChat story={story} chat={triggerChat} />;
   } else if (messageType === 'ACTION_QUEST_END') {
     content = <ReturnFromChat story={story} chat={triggerChat} />;
+  } else if (messageType === 'CUSTOM_COMMAND') {
+    content = null;
   } else {
     content = <div>Unknown message type: {messageType}</div>;
   }
