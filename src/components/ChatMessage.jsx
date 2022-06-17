@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { MESSAGE_DISPLAY, useMessageDisplay } from '../utils/chat-hooks.js';
 import { useScrollToBottom } from '../utils/scroll-to-bottom.js';
+import { getStoredVariables } from '../utils/variables.js';
 import { ChatResponse, updateVariables } from './ChatResponse.jsx';
 import { ImageWithPreview } from './ImageWithPreview.jsx';
 import { TypingIndicator } from './TypingIndicator.jsx';
@@ -32,18 +33,24 @@ function parseCustomCommand(text) {
         });
       return { input, result };
     });
-  const storage = JSON.parse(localStorage.getItem('variables') || '{}');
+  const variables = getStoredVariables();
   const validMatch = matches.find(({ input }) => {
     return input.every(([key, op, value]) => {
-      const leftValue = storage[key] || 0;
+      const leftValue = variables[key] || 0;
       const rightValue = Number.isNaN(Number(value))
-        ? storage[value] || 0
+        ? variables[value] || 0
         : Number(value);
       if (op === '>') {
         return leftValue > rightValue;
       }
+      if (op === '>=') {
+        return leftValue >= rightValue;
+      }
       if (op === '<') {
         return leftValue < rightValue;
+      }
+      if (op === '<=') {
+        return leftValue <= rightValue;
       }
       return false;
     });
@@ -96,6 +103,11 @@ export const ChatMessage = ({
   const { action, threadName } = parseCustomCommand(message.text);
 
   useEffect(() => {
+    if (messageType === 'CUSTOM_COMMAND' && action && threadName) {
+      // eslint-disable-next-line no-console
+      console.log(message.text);
+    }
+
     if (
       messageType === 'ACTION_MAIN_THREAD_BACK' ||
       messageType === 'ACTION_THREAD_BACK'
