@@ -6,6 +6,7 @@ import { Button } from './Button.jsx';
 import { ImageWithPreview } from './ImageWithPreview.jsx';
 import msgStyles from './ChatMessage.module.scss';
 import styles from './ChatResponse.module.scss';
+import { getStoredVariables, setStoredVariables } from '../utils/variables.js';
 
 export function updateVariables(text) {
   let commandText = (text || '').trim();
@@ -16,17 +17,17 @@ export function updateVariables(text) {
   const matches = [
     ...commandText.matchAll(/([a-z_][a-z_ ]*?)\s*([+-])\s*(\d+)/gi),
   ];
-  const storage = JSON.parse(localStorage.getItem('variables') || '{}');
+  const variables = getStoredVariables();
   matches.forEach(([, key, operation, number]) => {
-    let value = storage[key] || 0;
+    let value = variables[key] || 0;
     if (operation === '+') {
       value += Number(number);
     } else if (operation === '-') {
       value -= Number(number);
     }
-    storage[key] = value;
+    variables[key] = value;
   });
-  localStorage.setItem('variables', JSON.stringify(storage));
+  setStoredVariables(variables);
 }
 
 export const ChatResponse = ({ response, threadId, pump }) => {

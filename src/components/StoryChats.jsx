@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { getChatLink } from '../utils/links.js';
+import { deleteStoredVariables } from '../utils/variables.js';
 
 export const StoryChats = ({ story }) => {
   const history = useHistory();
@@ -18,7 +19,7 @@ export const StoryChats = ({ story }) => {
   };
 
   const onDeleteClick = () => {
-    localStorage.setItem('variables', '{}');
+    deleteStoredVariables();
   };
 
   return (
