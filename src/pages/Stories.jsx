@@ -19,7 +19,12 @@ export const Stories = () => (
         <Link to="/story?id=6273f6cffb3f79442df97278">HRV</Link>
       </li>
       <li>
-        <Link to="/story?id=62d56898c2437c3f1fa644a2">Nov story</Link>
+        <Link to="/story?id=62d56898c2437c3f1fa644a2">
+          Worker&apos;s Rights - SLO
+        </Link>
+      </li>
+      <li>
+        <Link to="/story?id=62c2cc82c2437c3f1feecfe8">Environment - SRB</Link>
       </li>
     </ul>
   </div>
