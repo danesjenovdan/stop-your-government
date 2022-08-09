@@ -15,3 +15,15 @@ export function setStoredVariables(value) {
 export function deleteStoredVariables() {
   setStoredVariables({});
 }
+
+export function getUnlockedChapters() {
+  return JSON.parse(localStorage.getItem('unlockedChapters') || '{}');
+}
+
+export function setUnlockedChapters(value) {
+  localStorage.setItem('unlockedChapters', JSON.stringify(value));
+}
+
+export function deleteUnlockedChapters() {
+  setUnlockedChapters({});
+}

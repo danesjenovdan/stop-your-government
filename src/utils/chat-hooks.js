@@ -47,10 +47,14 @@ export const useResponseDisplay = ({ type, hideResponseToChat }) => {
       : RESPONSE_DISPLAY.INTERACTIVE
   );
 
-  const setResponded = () => {
+  const setResponded = ({
+    type: responseType,
+    hideResponseToChat: hideResponse,
+  } = {}) => {
+    const hide = responseType === 'options' ? hideResponse : hideResponseToChat;
     if (displayState === RESPONSE_DISPLAY.INTERACTIVE) {
       setDisplayState(
-        hideResponseToChat ? RESPONSE_DISPLAY.HIDDEN : RESPONSE_DISPLAY.MESSAGE
+        hide ? RESPONSE_DISPLAY.HIDDEN : RESPONSE_DISPLAY.MESSAGE
       );
     }
   };

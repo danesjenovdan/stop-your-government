@@ -1,8 +1,12 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import classNames from 'classnames';
 import { useHistory } from 'react-router-dom';
 import { Button } from './Button.jsx';
 import { getChatLink } from '../utils/links.js';
+import {
+  getUnlockedChapters,
+  setUnlockedChapters,
+} from '../utils/variables.js';
 import styles from './StoryMap.module.scss';
 import government from '../assets/img/map/selected-government.png';
 import home from '../assets/img/map/selected-home.png';
@@ -108,16 +112,27 @@ const Map = ({ selectedChatId, onIconClick }) => {
   );
 };
 
-const SelectedChatInfo = ({ index, title, description, onStartClick }) => {
+const SelectedChatInfo = ({
+  title,
+  description,
+  selectedChapterLocked,
+  onStartClick,
+}) => {
   return (
     <div className={styles.selectedChatInfo}>
       <div className={styles.text}>
-        <div className={styles.chapter}>Chapter {index + 1}</div>
         <div className={styles.name}>{title}</div>
         <div className={styles.description}>{description}</div>
       </div>
-      <Button variant="gold" className={styles.button} onClick={onStartClick}>
-        Start
+      <Button
+        variant="gold"
+        className={classNames(styles.button, {
+          [styles.buttonLocked]: selectedChapterLocked,
+        })}
+        disabled={selectedChapterLocked}
+        onClick={onStartClick}
+      >
+        {selectedChapterLocked ? 'Locked' : 'Start'}
       </Button>
     </div>
   );
@@ -130,7 +145,19 @@ export const StoryMap = ({ story }) => {
     '60866bc48da3c7319440cd30'
   );
   const selectedChat = story.chats?.find((c) => c._id === selectedChatId);
-  const selectedChatIndex = story.chats?.indexOf(selectedChat);
+
+  const [unlockedStoryChapters, setUnlockedStoryChapters] = useState([]);
+  const selectedChapterLocked = !unlockedStoryChapters.includes(selectedChatId);
+
+  useEffect(() => {
+    const chapters = getUnlockedChapters();
+    chapters[story._id] = chapters[story._id] || [];
+    if (!chapters[story._id].includes('60866bc48da3c7319440cd30')) {
+      chapters[story._id].push('60866bc48da3c7319440cd30');
+      setUnlockedChapters(chapters);
+    }
+    setUnlockedStoryChapters(chapters[story._id]);
+  }, []);
 
   const onIconClick = (chatId) => {
     setSelectedChatId(chatId);
@@ -145,9 +172,9 @@ export const StoryMap = ({ story }) => {
     <>
       <Map selectedChatId={selectedChatId} onIconClick={onIconClick} />
       <SelectedChatInfo
-        index={selectedChatIndex}
         title={selectedChat?.title}
         description={selectedChat?.description}
+        selectedChapterLocked={selectedChapterLocked}
         onStartClick={onStartClick}
       />
     </>

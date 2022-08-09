@@ -7,7 +7,7 @@
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  margin-bottom: 5rem;
+  margin-bottom: 4rem;
   background-color: #496f2a;
 
   .mapHeight {
@@ -91,5 +91,10 @@
   .button {
     flex: 0 0 6rem;
     font-size: 1rem;
+  }
+
+  .buttonLocked {
+    filter: grayscale(100%);
+    cursor: not-allowed;
   }
 }

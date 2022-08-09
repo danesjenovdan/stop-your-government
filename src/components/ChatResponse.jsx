@@ -65,7 +65,7 @@ export const ChatResponse = ({ response, threadId, pump }) => {
   }
 
   const respond = () => {
-    setResponded();
+    setResponded({});
     pump();
   };
 
@@ -79,7 +79,7 @@ export const ChatResponse = ({ response, threadId, pump }) => {
           setMessageText(buttonText);
         }
         setMarkedWrongOptions(new Set());
-        setResponded();
+        setResponded({ type: 'quiz' });
         pump();
       } else {
         setMarkedWrongOptions((prev) => new Set([...prev, _id]));
@@ -87,14 +87,14 @@ export const ChatResponse = ({ response, threadId, pump }) => {
     };
 
   const respondToOptions =
-    ({ thread, text, buttonText }) =>
+    ({ thread, text, buttonText, hideResponseToChat }) =>
     () => {
       updateVariables(text);
       const overrideMessageText = text || buttonText;
       if (overrideMessageText) {
         setMessageText(buttonText);
       }
-      setResponded();
+      setResponded({ type: 'options', hideResponseToChat });
       if (threadId !== thread) {
         pump({ action: 'THREAD_CHANGE', threadId: thread });
       } else {

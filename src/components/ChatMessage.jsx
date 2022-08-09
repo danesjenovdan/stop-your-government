@@ -108,16 +108,21 @@ export const ChatMessage = ({
       console.log(message.text);
     }
 
-    if (
-      messageType === 'ACTION_MAIN_THREAD_BACK' ||
-      messageType === 'ACTION_THREAD_BACK'
-    ) {
+    if (messageType === 'ACTION_MAIN_THREAD_BACK') {
+      pump({ action: 'THREAD_BACK_TO_MAIN' });
+    }
+    if (messageType === 'ACTION_THREAD_BACK') {
       pump({ action: 'THREAD_BACK' });
     }
     if (messageType === 'CUSTOM_COMMAND') {
       updateVariables(message.text);
       if (action === 'THREAD_CHANGE' && threadName) {
         pump({ action, threadName });
+      } else if (
+        message.response.type === 'CONFIRMATION' &&
+        message.response.confirmText === 'Continue'
+      ) {
+        pump();
       }
     }
   }, []);
@@ -139,6 +144,12 @@ export const ChatMessage = ({
 
   if (messageType === 'CUSTOM_COMMAND') {
     if (action === 'THREAD_CHANGE' && threadName) {
+      return null;
+    }
+    if (
+      message.response.type === 'CONFIRMATION' &&
+      message.response.confirmText === 'Continue'
+    ) {
       return null;
     }
   }
