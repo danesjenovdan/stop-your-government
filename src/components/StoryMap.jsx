@@ -108,11 +108,10 @@ const Map = ({ selectedChatId, onIconClick }) => {
   );
 };
 
-const SelectedChatInfo = ({ index, title, description, onStartClick }) => {
+const SelectedChatInfo = ({ title, description, onStartClick }) => {
   return (
     <div className={styles.selectedChatInfo}>
       <div className={styles.text}>
-        <div className={styles.chapter}>Chapter {index + 1}</div>
         <div className={styles.name}>{title}</div>
         <div className={styles.description}>{description}</div>
       </div>
