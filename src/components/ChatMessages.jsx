@@ -29,10 +29,12 @@ export const ChatMessages = ({ story, chat }) => {
           ]);
         }
       }
-    } else if (action === 'THREAD_BACK') {
-      const newThread = threads[1];
+    } else if (action === 'THREAD_BACK' || action === 'THREAD_BACK_TO_MAIN') {
+      const newThreadIndex =
+        action === 'THREAD_BACK_TO_MAIN' ? threads.length - 1 : 1;
+      const newThread = threads[newThreadIndex];
       if (newThread) {
-        setThreads((prevThreads) => prevThreads.slice(1));
+        setThreads((prevThreads) => prevThreads.slice(newThreadIndex));
         const { message: lastMessage } = messages
           .slice()
           .reverse()
