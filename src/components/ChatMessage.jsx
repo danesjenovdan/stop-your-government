@@ -20,19 +20,38 @@ function parseCustomCommand(text) {
     .map((command) => command.trim())
     .filter(Boolean)
     .map((command) => {
-      let [input, result] = command.split('=').map((s) => s.trim());
-      result = result.replace(/^"/, '').replace(/"$/, '');
+      const commandParts = command.split(' = ').map((s) => s.trim());
+      if (commandParts?.length !== 2) {
+        // eslint-disable-next-line no-alert
+        alert(
+          `Invalid #split command!\n(only one ' = ' allowed, must have spaces around):\n\n${command}`
+        );
+        return null;
+      }
+      let [input, result] = commandParts;
+      result = result.replace(/^["“”]/, '').replace(/["“”]$/, '');
       input = input
         .split('&')
         .map((s) => s.trim())
         .map((s) => {
-          const [, key, op, value] = s.match(
-            /([a-z_][a-z_ ]*)\s*([>=<])\s*([0-9a-z_-][0-9a-z_ ]*)/i
+          const comparisonParts = s.split(/[>=<]{1,2}/i);
+          if (comparisonParts?.length !== 2) {
+            // eslint-disable-next-line no-alert
+            alert(
+              `Invalid #split command!\n(only one comparison at a time is allowed, separated with '&')\n\n${s}`
+            );
+            return null;
+          }
+          const match = s.match(
+            /([a-z_][a-z_ ]*)\s*([>=<]{1,2})\s*([0-9a-z_-][0-9a-z_ ]*)/i
           );
+          const [, key, op, value] = match;
           return [key.trim(), op, value.trim()];
-        });
+        })
+        .filter(Boolean);
       return { input, result };
-    });
+    })
+    .filter(Boolean);
   const variables = getStoredVariables();
   const validMatch = matches.find(({ input }) => {
     return input.every(([key, op, value]) => {
@@ -51,6 +70,9 @@ function parseCustomCommand(text) {
       }
       if (op === '<=') {
         return leftValue <= rightValue;
+      }
+      if (op === '==') {
+        return leftValue === rightValue;
       }
       return false;
     });
