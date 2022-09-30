@@ -9,4 +9,4 @@ resources:
 images:
   - name: stopyourgovernment
     newName: rg.fr-par.scw.cloud/djnd/stopyourgovernment
-    newTag: '434afa004112cd7df57dc51b0cbbde8aba685123'
+    newTag: '48d9172ca1a5a11e0b76e66312c90e81db7b0728'
