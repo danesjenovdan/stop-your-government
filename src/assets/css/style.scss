@@ -5,6 +5,10 @@ body {
   color: $body-color;
 }
 
+#root {
+  background-color: #213345;
+}
+
 .app {
   min-height: 100vh;
   display: flex;
@@ -19,6 +23,7 @@ body {
   flex: 1 0 100%;
   display: flex;
   flex-direction: column;
+  background: $body-bg;
 }
 
 .strong {

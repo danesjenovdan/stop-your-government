@@ -1,0 +1,98 @@
+@import '../assets/css/variables';
+
+.storyChats {
+  margin-left: -$gutter;
+  margin-right: -$gutter;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  background-image: linear-gradient(
+      to bottom,
+      #102950 0%,
+      #102950 15%,
+      #fff8 100%
+    ),
+    url('../assets/img/map/map-1.png');
+  background-position: center;
+  background-size: auto 110%;
+  background-repeat: no-repeat;
+
+  .header {
+    margin-top: 1rem;
+    margin-bottom: 1.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1.25rem;
+
+    .image img {
+      width: 4rem;
+      height: 4rem;
+    }
+
+    .name {
+      font-family: 'Grandstander', cursive;
+      text-align: center;
+      font-size: 1.75rem;
+      font-weight: 700;
+      line-height: 1;
+      color: #fff;
+
+      .theme {
+        font-size: 1rem;
+        color: #8dc6f4;
+      }
+    }
+  }
+
+  .buttons {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+
+    .button {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 61px;
+      background-image: linear-gradient(to top, #a5d3f8 0%, #6bb0e7 100%);
+      border: 0;
+      border-radius: 10rem;
+      color: #10284f;
+      box-shadow: 0 5px 0 0 #497191, 0 2.5px 0 7.5px #e3f1ff;
+      overflow: hidden;
+
+      .bgImage {
+        position: absolute;
+        width: 100% !important;
+        opacity: 0.8;
+      }
+
+      .number {
+        position: relative;
+        z-index: 1;
+        width: 2.5rem;
+        height: 2.5rem;
+        background-image: linear-gradient(to top, #a1d1f7 0%, #cbe6fa 100%);
+        border: 0;
+        border-radius: 50%;
+        box-shadow: 0 0 0 2px #e3f1ff;
+        font-family: 'Grandstander', cursive;
+        font-size: 2rem;
+        font-weight: 700;
+        color: #10284f;
+      }
+
+      &.unlocked {
+        .number {
+          background-image: linear-gradient(to top, #edd33c 0%, #f8ea9a 100%);
+          box-shadow: 0 0 0 2px #f6f3e1;
+          color: #000;
+        }
+      }
+    }
+  }
+}

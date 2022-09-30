@@ -3,17 +3,13 @@
 .response {
   margin-top: auto;
 
-  .confirmation {
-    text-align: center;
-    margin-bottom: $gutter;
-  }
-
+  .confirmation,
   .quiz,
   .options {
     margin-left: -$gutter;
     margin-right: -$gutter;
     padding: $gutter;
-    background-color: $response-bg;
+    background: $response-bg;
     color: $response-color;
 
     .text {
@@ -24,11 +20,7 @@
     }
 
     .buttons {
-      $gap: 0.25rem;
-
-      padding: $gap;
-      border-radius: $button-border-radius;
-      background-color: $body-bg;
+      $gap: 0.5rem;
 
       &.images {
         display: grid;
@@ -62,6 +54,9 @@
         width: 100%;
         margin-bottom: $gap;
         position: relative;
+        border: 0;
+        border-radius: 10rem;
+        box-shadow: 0 4px 0 0 #497191;
 
         &:last-child {
           margin-bottom: 0;

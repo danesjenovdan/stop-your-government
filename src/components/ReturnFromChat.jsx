@@ -1,17 +1,19 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
+import { useQuery } from '../utils/hooks.js';
 import { getStoryLink } from '../utils/links.js';
 import { Button } from './Button.jsx';
 import styles from './ReturnFromChat.module.scss';
 
-export const ReturnFromChat = ({ story, chat }) => {
+export const ReturnFromChat = ({ story }) => {
   const history = useHistory();
+  const query = useQuery();
 
   const onClick = () => {
-    return history.push(getStoryLink(story._id));
+    const lang = query.get('lang');
+    return history.push(getStoryLink(story._id, lang));
   };
 
-  // TODO: highlight chat on return
   return (
     <div className={styles.returnFromChat}>
       <Button onClick={onClick}>Return to map</Button>

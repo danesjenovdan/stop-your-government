@@ -106,7 +106,11 @@ export const ChatResponse = ({ response, threadId, pump }) => {
   if (response.type === 'CONFIRMATION') {
     content = (
       <div className={styles.confirmation}>
-        <Button onClick={respond}>{response.confirmText}</Button>
+        <div className={styles.buttons}>
+          <Button className={styles.button} onClick={respond}>
+            {response.confirmText}
+          </Button>
+        </div>
       </div>
     );
   } else if (response.type === 'QUIZ') {
