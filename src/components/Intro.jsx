@@ -5,28 +5,29 @@ import classNames from 'classnames';
 import { Button } from './Button.jsx';
 import styles from './Intro.module.scss';
 import { getStoryLink } from '../utils/links.js';
-import anita from '../assets/img/intro/characters/anita.png';
-import jure from '../assets/img/intro/characters/jure.png';
-import vanja from '../assets/img/intro/characters/vanja.png';
+import {
+  CHARACTERS,
+  CHARACTERS_HRV,
+  CHARACTERS_SRP,
+} from '../utils/character-stories.js';
 
-const CHARACTERS = [
-  { id: 'vanja', name: 'Vanja', image: vanja },
-  { id: 'jure', name: 'Jurij', image: jure },
-  { id: 'anita', name: 'Anita', image: anita },
-];
+const characters = {
+  slv: CHARACTERS,
+  hrv: CHARACTERS_HRV,
+  srp: CHARACTERS_SRP,
+};
 
-export const Intro = () => {
+export const Intro = ({ lang }) => {
   const history = useHistory();
   const scrollerRef = useRef();
-  const [selectedCharacter, setSelectedCharacter] = useState(CHARACTERS[1]);
+  const CHARS = characters[lang];
+  const [selectedCharacter, setSelectedCharacter] = useState(CHARS[0]);
 
-  const currentCharacterIndex = CHARACTERS.indexOf(selectedCharacter);
+  const currentCharacterIndex = CHARS.indexOf(selectedCharacter);
   const getNextCharacterIndex =
     (dir = 1) =>
     () => {
-      return (
-        (currentCharacterIndex + dir + CHARACTERS.length) % CHARACTERS.length
-      );
+      return (currentCharacterIndex + dir + CHARS.length) % CHARS.length;
     };
 
   const [, springScroll] = useSpring(() => ({
@@ -54,14 +55,14 @@ export const Intro = () => {
   const ratio = (height / width) * 100;
 
   const onSelectClick = () => {
-    const chatLink = getStoryLink('60866bc48da3c7319440cd2c');
+    const chatLink = getStoryLink(selectedCharacter.storyId, lang);
     history.push(chatLink);
   };
 
   const selectNextCharacter =
     (dir = 1) =>
     () => {
-      setSelectedCharacter(CHARACTERS[getNextCharacterIndex(dir)()]);
+      setSelectedCharacter(CHARS[getNextCharacterIndex(dir)()]);
     };
 
   return (
@@ -78,7 +79,7 @@ export const Intro = () => {
                   alt={character.name}
                 />
               </div>
-            ))(CHARACTERS[getNextCharacterIndex(-1)()])}
+            ))(CHARS[getNextCharacterIndex(-1)()])}
             <div className={classNames(styles.character, styles.selected)}>
               <img
                 key={selectedCharacter.name}
@@ -96,7 +97,7 @@ export const Intro = () => {
                   alt={character.name}
                 />
               </div>
-            ))(CHARACTERS[getNextCharacterIndex(1)()])}
+            ))(CHARS[getNextCharacterIndex(1)()])}
           </div>
           <div className={styles.buttons}>
             <div className={styles.character}>
@@ -112,7 +113,8 @@ export const Intro = () => {
                 </svg>
               </Button>
               <div className={styles.selectedName}>
-                {selectedCharacter.name}
+                <div>{selectedCharacter.name}</div>
+                <div className={styles.theme}>{selectedCharacter.theme}</div>
               </div>
               <Button className={styles.arrow} onClick={selectNextCharacter(1)}>
                 <svg viewBox="0 0 88 90" xmlns="http://www.w3.org/2000/svg">
@@ -128,7 +130,7 @@ export const Intro = () => {
               className={styles.selectButton}
               onClick={onSelectClick}
             >
-              Select
+              IZBERI
             </Button>
           </div>
         </div>

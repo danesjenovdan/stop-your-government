@@ -15,11 +15,16 @@ export const App = () => (
           <Stories />
         </Route>
         <Route path="/story">
-          <Header />
           <Story />
         </Route>
+        <Route path="/hrv" exact>
+          <Home lang="hrv" />
+        </Route>
+        <Route path="/srp" exact>
+          <Home lang="srp" />
+        </Route>
         <Route path="/" exact>
-          <Home />
+          <Home lang="slv" />
         </Route>
         <Route>
           <Header />

@@ -40,28 +40,59 @@
         margin: $gutter;
         padding: $gutter;
         background-color: $body-bg;
-        border: 2px solid currentColor;
-        border-radius: $button-border-radius;
+        border-radius: 2.5rem;
+        font-family: 'Grandstander', cursive;
+        text-align: center;
 
         .character {
           display: flex;
+          align-items: center;
 
           .selectedName {
             flex: 1;
             text-align: center;
-            font-size: 1.125rem;
+            font-size: 1.75rem;
             font-weight: 700;
+            line-height: 1;
+
+            .theme {
+              font-size: 1rem;
+              color: #4b4b4b;
+            }
           }
 
           .arrow {
-            flex: 0 0 3.5rem;
-            color: $body-color;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 3rem;
+            height: 3rem;
+            background-image: linear-gradient(to top, #a5d3f8 0%, #6bb0e7 100%);
+            border: 0;
+            border-radius: 50%;
+            color: #10284f;
+            box-shadow: 0 3px 0 0 #497191, 0 0 0 3px #e3f1ff;
           }
         }
 
         .selectButton {
-          width: 100%;
           margin-top: $gutter;
+          padding: 0.25rem 2rem 0;
+          border: 0;
+          background-image: linear-gradient(
+              to bottom,
+              #f8eba1 0%,
+              #f5df5d 47%,
+              #ecd238 99%,
+              #ecd238 100%
+            ),
+            linear-gradient(to top, #fbefa0 0%, #f1cf13 100%);
+          box-shadow: 0 4px 0 0 #bca419;
+          color: #3c3407;
+          font-size: 2rem;
+
+          height: 2.75rem;
+          line-height: 2.75rem;
         }
       }
     }

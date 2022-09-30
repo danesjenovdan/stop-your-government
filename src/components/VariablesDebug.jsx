@@ -7,7 +7,7 @@ import {
 import styles from './VariablesDebug.module.scss';
 
 export const VariablesDebug = () => {
-  const [collapsed, setCollapsed] = useState(false);
+  const [collapsed, setCollapsed] = useState(true);
   const [variables, setVariables] = useState(null);
 
   const onDeleteClick = () => {

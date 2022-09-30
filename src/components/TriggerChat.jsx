@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
+import { useQuery } from '../utils/hooks.js';
 import { getChatLink } from '../utils/links.js';
 import {
   getUnlockedChapters,
@@ -11,6 +12,8 @@ import styles from './TriggerChat.module.scss';
 
 export const TriggerChat = ({ story, chat }) => {
   const history = useHistory();
+  const query = useQuery();
+  const lang = query.get('lang');
 
   useEffect(() => {
     const chapters = getUnlockedChapters();
@@ -22,7 +25,7 @@ export const TriggerChat = ({ story, chat }) => {
   }, []);
 
   const onClick = () => {
-    return history.push(getChatLink(story._id, chat._id));
+    return history.push(getChatLink(story._id, chat._id, lang));
   };
 
   return (

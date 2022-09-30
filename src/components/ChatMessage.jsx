@@ -190,7 +190,7 @@ export const ChatMessage = ({
   } else if (messageType === 'ACTION' && triggerChat) {
     content = <TriggerChat story={story} chat={triggerChat} />;
   } else if (messageType === 'ACTION_QUEST_END') {
-    content = <ReturnFromChat story={story} chat={triggerChat} />;
+    content = <ReturnFromChat story={story} />;
   } else if (messageType === 'CUSTOM_COMMAND') {
     content = null;
   } else {
