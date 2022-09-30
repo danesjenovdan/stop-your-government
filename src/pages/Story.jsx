@@ -2,6 +2,7 @@ import React from 'react';
 import { useQuery, useStoryJson } from '../utils/hooks.js';
 import { ChatContainer } from '../components/ChatContainer.jsx';
 import { StoryChats } from '../components/StoryChats.jsx';
+import { VariablesDebug } from '../components/VariablesDebug.jsx';
 import {
   CHARACTERS,
   CHARACTERS_HRV,
@@ -27,6 +28,7 @@ export const Story = () => {
 
   return (
     <div className="container">
+      <VariablesDebug />
       {(() => {
         if (loading) {
           return <h2>Loading story ...</h2>;

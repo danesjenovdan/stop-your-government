@@ -1,6 +1,5 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { VariablesDebug } from './VariablesDebug.jsx';
 import styles from './Header.module.scss';
 
 export const Header = () => (
@@ -13,6 +12,5 @@ export const Header = () => (
         Stories
       </NavLink>
     </nav>
-    <VariablesDebug />
   </header>
 );
