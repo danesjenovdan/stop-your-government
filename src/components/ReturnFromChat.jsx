@@ -8,9 +8,9 @@ import styles from './ReturnFromChat.module.scss';
 export const ReturnFromChat = ({ story }) => {
   const history = useHistory();
   const query = useQuery();
+  const lang = query.get('lang');
 
   const onClick = () => {
-    const lang = query.get('lang');
     return history.push(getStoryLink(story._id, lang));
   };
 

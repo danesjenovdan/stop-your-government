@@ -42,7 +42,14 @@ export const Story = () => {
         if (!chatId || !chat) {
           return <StoryChats story={story} character={character} />;
         }
-        return <ChatContainer key={chat._id} story={story} chat={chat} />;
+        return (
+          <ChatContainer
+            key={chat._id}
+            story={story}
+            character={character}
+            chat={chat}
+          />
+        );
       })()}
     </div>
   );

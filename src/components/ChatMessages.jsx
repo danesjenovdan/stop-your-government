@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import styles from './ChatMessages.module.scss';
 import { ChatMessage } from './ChatMessage.jsx';
 
 export const ChatMessages = ({ story, chat }) => {
@@ -67,7 +68,7 @@ export const ChatMessages = ({ story, chat }) => {
   };
 
   return (
-    <>
+    <div className={styles.messages}>
       {messages?.map(({ message, threadId }) => {
         const actor = story.actors.find((a) => a._id === message.actor);
         const tcid = message.actionOptions?.triggerChatId;
@@ -84,6 +85,6 @@ export const ChatMessages = ({ story, chat }) => {
           />
         );
       })}
-    </>
+    </div>
   );
 };
