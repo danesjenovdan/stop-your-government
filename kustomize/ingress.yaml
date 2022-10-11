@@ -8,10 +8,10 @@ spec:
   ingressClassName: nginx
   tls:
     - hosts:
-        - stopyourgovernment.lb.djnd.si
+        - stopyourgovernment.djnd.si
       secretName: stopyourgovernment-nginx-tls
   rules:
-    - host: stopyourgovernment.lb.djnd.si
+    - host: stopyourgovernment.djnd.si
       http:
         paths:
           - path: /
