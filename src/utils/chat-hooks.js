@@ -49,9 +49,9 @@ export const useResponseDisplay = ({ type, hideResponseToChat }) => {
 
   const setResponded = ({
     type: responseType,
-    hideResponseToChat: hideResponse,
+    // hideResponseToChat: hideResponse,
   } = {}) => {
-    const hide = responseType === 'options' ? hideResponse : hideResponseToChat;
+    const hide = responseType === 'options' ? false : hideResponseToChat;
     if (displayState === RESPONSE_DISPLAY.INTERACTIVE) {
       setDisplayState(
         hide ? RESPONSE_DISPLAY.HIDDEN : RESPONSE_DISPLAY.MESSAGE
