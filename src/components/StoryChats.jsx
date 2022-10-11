@@ -4,7 +4,7 @@ import { useHistory } from 'react-router-dom';
 import { useQuery } from '../utils/hooks.js';
 import styles from './StoryChats.module.scss';
 import { ImageWithPreview } from './ImageWithPreview.jsx';
-import stopSign from '../assets/img/stop-sign.png';
+import stopSign from '../assets/img/stop-sign-pole-bird.png';
 import { getChatLink } from '../utils/links.js';
 import {
   getUnlockedChapters,
@@ -56,10 +56,11 @@ export const StoryChats = ({ story, character }) => {
 
   return (
     <div className={styles.storyChats}>
+      <div className={styles.glow} />
+      <div className={styles.image}>
+        <img src={stopSign} alt="" />
+      </div>
       <div className={styles.header}>
-        <div className={styles.image}>
-          <img src={stopSign} alt="" />
-        </div>
         <div className={styles.name}>
           <div>{character.name}</div>
           <div className={styles.theme}>{character.theme}</div>
