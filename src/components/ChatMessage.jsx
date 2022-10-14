@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import classNames from 'classnames';
 import { MESSAGE_DISPLAY, useMessageDisplay } from '../utils/chat-hooks.js';
 import { useScrollToBottom } from '../utils/scroll-to-bottom.js';
 import { getStoredVariables } from '../utils/variables.js';
@@ -99,7 +100,11 @@ const Content = ({ actor, text, image }) => {
   return (
     <div className={styles.content}>
       {!!actor?.name && <div className={styles.name}>{actor.name}</div>}
-      <div className={styles.bubble}>
+      <div
+        className={classNames(styles.bubble, {
+          [styles.narrator]: !actor?.name,
+        })}
+      >
         {!!image && <ImageWithPreview image={image} className={styles.image} />}
         {!!text && <div className={styles.text}>{text}</div>}
       </div>
