@@ -24,8 +24,8 @@
 
     .name {
       margin: 0 0.25rem 0.15rem;
-      font-size: 0.75rem;
-      font-weight: 500;
+      font-size: 1rem;
+      font-weight: 600;
       color: $incoming-chat-name-color;
     }
 
@@ -33,9 +33,9 @@
       background-color: $incoming-chat-bg;
       border-radius: 0.75rem;
       color: $incoming-chat-color;
-      font-size: 0.875rem;
+      font-size: 1rem;
       line-height: 1.4;
-      font-weight: 300;
+      font-weight: 400;
       width: fit-content;
       max-width: 100%;
       height: max-content;
@@ -50,6 +50,14 @@
         max-width: 100%;
         min-width: 4rem;
         min-height: 4rem;
+      }
+
+      &.narrator {
+        background-color: transparent;
+
+        .text {
+          padding: 0 0.4rem;
+        }
       }
     }
   }
