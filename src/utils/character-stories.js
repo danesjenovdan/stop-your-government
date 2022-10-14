@@ -21,7 +21,7 @@ export const CHARACTERS = [
     id: 'anita',
     name: 'HANA',
     theme: 'Reproduktivne pravice',
-    storyId: 'TBD',
+    storyId: '6336ee8fc2437c3f1f4dca9d',
     image: anita,
   },
 ];
@@ -45,7 +45,7 @@ export const CHARACTERS_HRV = [
     id: 'anita',
     name: 'HANA',
     theme: 'Reproduktivna prava',
-    storyId: '6336ee8fc2437c3f1f4dca9d',
+    storyId: '6343f0a5c2437c3f1fffa1e5',
     image: anita,
   },
 ];
