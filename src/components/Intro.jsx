@@ -17,10 +17,17 @@ const characters = {
   srp: CHARACTERS_SRP,
 };
 
+const selectText = {
+  slv: 'IZBERI',
+  hrv: 'IZABERI',
+  srp: 'ODABERI',
+};
+
 export const Intro = ({ lang }) => {
   const history = useHistory();
   const scrollerRef = useRef();
   const CHARS = characters[lang];
+  const SELECT_TEXT = selectText[lang];
   const [selectedCharacter, setSelectedCharacter] = useState(CHARS[0]);
 
   const currentCharacterIndex = CHARS.indexOf(selectedCharacter);
@@ -136,7 +143,7 @@ export const Intro = ({ lang }) => {
               className={styles.selectButton}
               onClick={onSelectClick}
             >
-              IZBERI
+              {SELECT_TEXT}
             </Button>
           </div>
         </div>
