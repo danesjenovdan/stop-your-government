@@ -29,7 +29,7 @@ export const CHARACTERS = [
 export const CHARACTERS_HRV = [
   {
     id: 'jure',
-    name: 'JURIJ',
+    name: 'IGOR',
     theme: 'Zaštita prirode',
     storyId: '6273f6cffb3f79442df97278',
     image: jure,
