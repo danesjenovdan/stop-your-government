@@ -6,6 +6,10 @@ import { Button } from './Button.jsx';
 import styles from './Intro.module.scss';
 import { getStoryLink } from '../utils/links.js';
 import {
+  deleteStoredVariables,
+  deleteUnlockedChapters,
+} from '../utils/variables.js';
+import {
   CHARACTERS,
   CHARACTERS_HRV,
   CHARACTERS_SRP,
@@ -62,6 +66,8 @@ export const Intro = ({ lang }) => {
   const ratio = (height / width) * 100;
 
   const onSelectClick = () => {
+    deleteStoredVariables();
+    deleteUnlockedChapters();
     const chatLink = getStoryLink(selectedCharacter.storyId, lang);
     history.push(chatLink);
   };
