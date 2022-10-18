@@ -24,27 +24,49 @@
       flex-direction: column;
       justify-content: flex-end;
 
-      .characters {
-        margin: $gutter;
-        margin-bottom: 0;
-        height: 17rem;
-        display: grid;
-        grid-template-columns: 1fr 1.5fr 1fr;
+      .charactersWrapper {
+        position: relative;
+        z-index: 1;
+        height: 0;
+        padding-top: 65%;
 
-        .character {
-          margin: 0 -1rem;
+        .characters {
+          position: absolute;
+          inset: 0;
+          margin: $gutter;
+          margin-bottom: 0;
+          display: grid;
+          grid-template-columns: 1fr 1.5fr 1fr;
+
+          .character {
+            margin: 0 -1rem;
+          }
         }
       }
 
       .buttons {
+        position: relative;
+        z-index: 2;
         margin: $gutter;
-        padding: $gutter;
         background-color: $body-bg;
         border-radius: 2.5rem;
         font-family: 'Grandstander', cursive;
         text-align: center;
+        overflow: hidden;
+
+        .title {
+          padding: 1rem $gutter 0.75rem;
+          background-image: linear-gradient(88deg, #10284f 0%, #79bcf2 100%);
+          color: #fff;
+          font-weight: 700;
+          font-size: 18px;
+          text-shadow: -2px -2px 0 #25456f, 2px -2px 0 #25456f,
+            -2px 2px 0 #25456f, 2px 2px 0 #25456f;
+        }
 
         .character {
+          margin-top: $gutter;
+          padding: 0 1rem;
           display: flex;
           align-items: center;
 
@@ -74,6 +96,7 @@
             color: #10284f;
             box-shadow: 0 3px 0 0 #497191, 0 0 0 3px #e3f1ff;
             padding: 0.5rem;
+            margin-top: -2.5rem;
 
             svg {
               width: 100%;
@@ -84,6 +107,7 @@
 
         .selectButton {
           margin-top: $gutter;
+          margin-bottom: 1rem;
           padding: 0.25rem 2rem 0;
           border: 0;
           background-image: linear-gradient(

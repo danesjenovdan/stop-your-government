@@ -27,3 +27,15 @@ export function setUnlockedChapters(value) {
 export function deleteUnlockedChapters() {
   setUnlockedChapters({});
 }
+
+export function getCompletedChapters() {
+  return JSON.parse(localStorage.getItem('completedChapters') || '{}');
+}
+
+export function setCompletedChapters(value) {
+  localStorage.setItem('completedChapters', JSON.stringify(value));
+}
+
+export function deleteCompletedChapters() {
+  setCompletedChapters({});
+}

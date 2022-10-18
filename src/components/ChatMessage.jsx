@@ -7,7 +7,6 @@ import { ChatResponse, updateVariables } from './ChatResponse.jsx';
 import { ImageWithPreview } from './ImageWithPreview.jsx';
 import { TypingIndicator } from './TypingIndicator.jsx';
 import { TriggerChat } from './TriggerChat.jsx';
-import { ReturnFromChat } from './ReturnFromChat.jsx';
 import styles from './ChatMessage.module.scss';
 
 function parseCustomCommand(text) {
@@ -117,15 +116,18 @@ export const ChatMessage = ({
   actor,
   triggerChat,
   story,
+  chat,
   threadId,
   pump,
 }) => {
   const displayState = useMessageDisplay(message);
   const { maybeScrollToBottom } = useScrollToBottom();
 
-  const messageType = message.text?.trim().startsWith('#')
-    ? 'CUSTOM_COMMAND'
-    : message.type;
+  const messageType =
+    message.text?.trim().startsWith('#') &&
+    !message.text?.trim().startsWith('#\ufe0f')
+      ? 'CUSTOM_COMMAND'
+      : message.type;
 
   const { action, threadName } = parseCustomCommand(message.text);
 
@@ -193,9 +195,11 @@ export const ChatMessage = ({
       <Content actor={actor} image={message.file} />
     ) : null;
   } else if (messageType === 'ACTION' && triggerChat) {
-    content = <TriggerChat story={story} chat={triggerChat} />;
+    content = (
+      <TriggerChat story={story} chat={chat} triggerChat={triggerChat} />
+    );
   } else if (messageType === 'ACTION_QUEST_END') {
-    content = <ReturnFromChat story={story} />;
+    content = null;
   } else if (messageType === 'CUSTOM_COMMAND') {
     content = null;
   } else {
