@@ -80,6 +80,7 @@ export const ChatMessages = ({ story, chat }) => {
             actor={actor}
             triggerChat={triggerChat}
             story={story}
+            chat={chat}
             threadId={threadId}
             pump={pump}
           />

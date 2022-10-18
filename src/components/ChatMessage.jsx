@@ -116,6 +116,7 @@ export const ChatMessage = ({
   actor,
   triggerChat,
   story,
+  chat,
   threadId,
   pump,
 }) => {
@@ -194,7 +195,9 @@ export const ChatMessage = ({
       <Content actor={actor} image={message.file} />
     ) : null;
   } else if (messageType === 'ACTION' && triggerChat) {
-    content = <TriggerChat story={story} chat={triggerChat} />;
+    content = (
+      <TriggerChat story={story} chat={chat} triggerChat={triggerChat} />
+    );
   } else if (messageType === 'ACTION_QUEST_END') {
     content = null;
   } else if (messageType === 'CUSTOM_COMMAND') {

@@ -128,11 +128,27 @@
         color: #10284f;
       }
 
+      .completedIcon {
+        position: absolute;
+        right: 2rem;
+        width: 2.5rem;
+        height: 2.5rem;
+        object-fit: contain;
+      }
+
       &.unlocked {
         .number {
           background-image: linear-gradient(to top, #edd33c 0%, #f8ea9a 100%);
           box-shadow: 0 0 0 2px #f6f3e1;
           color: #000;
+        }
+      }
+
+      &.completed {
+        background-image: linear-gradient(to top, #6abda4 0%, #06b782 100%);
+
+        .bgImage {
+          opacity: 0.5;
         }
       }
     }

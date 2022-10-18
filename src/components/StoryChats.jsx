@@ -5,8 +5,10 @@ import { useQuery } from '../utils/hooks.js';
 import styles from './StoryChats.module.scss';
 import { ImageWithPreview } from './ImageWithPreview.jsx';
 import stopSign from '../assets/img/stop-sign-pole-bird.png';
+import check from '../assets/img/check.png';
 import { getChatLink } from '../utils/links.js';
 import {
+  getCompletedChapters,
   getUnlockedChapters,
   setUnlockedChapters,
 } from '../utils/variables.js';
@@ -18,7 +20,7 @@ const langToUrl = {
   srp: '/sr',
 };
 
-const ChatButton = ({ story, chat, index, unlocked }) => {
+const ChatButton = ({ story, chat, index, unlocked, completed }) => {
   const history = useHistory();
   const query = useQuery();
   const lang = query.get('lang');
@@ -36,6 +38,7 @@ const ChatButton = ({ story, chat, index, unlocked }) => {
       className={classNames({
         [styles.button]: true,
         [styles.unlocked]: unlocked,
+        [styles.completed]: completed,
       })}
       onClick={() => onChatClick(chat._id)}
     >
@@ -43,6 +46,9 @@ const ChatButton = ({ story, chat, index, unlocked }) => {
         <ImageWithPreview image={chat.poster} className={styles.bgImage} />
       )}
       <div className={styles.number}>{index}</div>
+      {!!completed && (
+        <img src={check} alt="" className={styles.completedIcon} />
+      )}
     </button>
   );
 };
@@ -53,16 +59,21 @@ export const StoryChats = ({ story, character }) => {
   const lang = query.get('lang');
 
   const [unlockedStoryChapters, setUnlockedStoryChapters] = useState([]);
+  const [completedStoryChapters, setCompletedStoryChapters] = useState([]);
   const mainChat = story.chats.find((c) => c.isMainChat);
 
   useEffect(() => {
-    const chapters = getUnlockedChapters();
-    chapters[story._id] = chapters[story._id] || [];
-    if (mainChat && !chapters[story._id].includes(mainChat._id)) {
-      chapters[story._id].push(mainChat._id);
-      setUnlockedChapters(chapters);
+    const unlockedChapters = getUnlockedChapters();
+    unlockedChapters[story._id] = unlockedChapters[story._id] || [];
+    if (mainChat && !unlockedChapters[story._id].includes(mainChat._id)) {
+      unlockedChapters[story._id].push(mainChat._id);
+      setUnlockedChapters(unlockedChapters);
     }
-    setUnlockedStoryChapters(chapters[story._id]);
+    setUnlockedStoryChapters(unlockedChapters[story._id]);
+
+    const completedChapters = getCompletedChapters();
+    completedChapters[story._id] = completedChapters[story._id] || [];
+    setCompletedStoryChapters(completedChapters[story._id]);
   }, []);
 
   const onHomeClick = () => {
@@ -99,6 +110,7 @@ export const StoryChats = ({ story, character }) => {
             chat={chat}
             index={i + 1}
             unlocked={unlockedStoryChapters.includes(chat._id)}
+            completed={completedStoryChapters.includes(chat._id)}
           />
         ))}
       </div>
