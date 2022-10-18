@@ -122,9 +122,11 @@ export const ChatMessage = ({
   const displayState = useMessageDisplay(message);
   const { maybeScrollToBottom } = useScrollToBottom();
 
-  const messageType = message.text?.trim().startsWith('#')
-    ? 'CUSTOM_COMMAND'
-    : message.type;
+  const messageType =
+    message.text?.trim().startsWith('#') &&
+    !message.text?.trim().startsWith('#\ufe0f')
+      ? 'CUSTOM_COMMAND'
+      : message.type;
 
   const { action, threadName } = parseCustomCommand(message.text);
 
