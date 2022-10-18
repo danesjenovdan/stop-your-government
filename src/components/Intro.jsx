@@ -23,8 +23,14 @@ const characters = {
 
 const selectText = {
   slv: 'IZBERI',
-  hrv: 'IZABERI',
-  srp: 'ODABERI',
+  hrv: 'ODABERI',
+  srp: 'IZABERI',
+};
+
+const titleText = {
+  slv: 'Izberi zgodbo',
+  hrv: 'Odaberite priču',
+  srp: 'Izaberite priču',
 };
 
 export const Intro = ({ lang }) => {
@@ -32,6 +38,7 @@ export const Intro = ({ lang }) => {
   const scrollerRef = useRef();
   const CHARS = characters[lang];
   const SELECT_TEXT = selectText[lang];
+  const TITLE_TEXT = titleText[lang];
   const [selectedCharacter, setSelectedCharacter] = useState(CHARS[0]);
 
   const currentCharacterIndex = CHARS.indexOf(selectedCharacter);
@@ -82,37 +89,40 @@ export const Intro = ({ lang }) => {
     <div className={styles.introContainer} ref={scrollerRef}>
       <div className={styles.introHeight} style={{ paddingTop: `${ratio}%` }}>
         <div className={styles.intro}>
-          <div className={styles.characters}>
-            {((character) => (
-              <div className={styles.character}>
+          <div className={styles.charactersWrapper}>
+            <div className={styles.characters}>
+              {((character) => (
+                <div className={styles.character}>
+                  <img
+                    key={character.name}
+                    style={{ width: '100%' }}
+                    src={character.image}
+                    alt={character.name}
+                  />
+                </div>
+              ))(CHARS[getNextCharacterIndex(-1)()])}
+              <div className={classNames(styles.character, styles.selected)}>
                 <img
-                  key={character.name}
+                  key={selectedCharacter.name}
                   style={{ width: '100%' }}
-                  src={character.image}
-                  alt={character.name}
+                  src={selectedCharacter.image}
+                  alt={selectedCharacter.name}
                 />
               </div>
-            ))(CHARS[getNextCharacterIndex(-1)()])}
-            <div className={classNames(styles.character, styles.selected)}>
-              <img
-                key={selectedCharacter.name}
-                style={{ width: '100%' }}
-                src={selectedCharacter.image}
-                alt={selectedCharacter.name}
-              />
+              {((character) => (
+                <div className={styles.character}>
+                  <img
+                    key={character.name}
+                    style={{ width: '100%' }}
+                    src={character.image}
+                    alt={character.name}
+                  />
+                </div>
+              ))(CHARS[getNextCharacterIndex(1)()])}
             </div>
-            {((character) => (
-              <div className={styles.character}>
-                <img
-                  key={character.name}
-                  style={{ width: '100%' }}
-                  src={character.image}
-                  alt={character.name}
-                />
-              </div>
-            ))(CHARS[getNextCharacterIndex(1)()])}
           </div>
           <div className={styles.buttons}>
+            <div className={styles.title}>{TITLE_TEXT}</div>
             <div className={styles.character}>
               <Button
                 className={styles.arrow}
