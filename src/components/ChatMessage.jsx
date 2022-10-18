@@ -7,7 +7,6 @@ import { ChatResponse, updateVariables } from './ChatResponse.jsx';
 import { ImageWithPreview } from './ImageWithPreview.jsx';
 import { TypingIndicator } from './TypingIndicator.jsx';
 import { TriggerChat } from './TriggerChat.jsx';
-import { ReturnFromChat } from './ReturnFromChat.jsx';
 import styles from './ChatMessage.module.scss';
 
 function parseCustomCommand(text) {
@@ -195,7 +194,7 @@ export const ChatMessage = ({
   } else if (messageType === 'ACTION' && triggerChat) {
     content = <TriggerChat story={story} chat={triggerChat} />;
   } else if (messageType === 'ACTION_QUEST_END') {
-    content = <ReturnFromChat story={story} />;
+    content = null;
   } else if (messageType === 'CUSTOM_COMMAND') {
     content = null;
   } else {
