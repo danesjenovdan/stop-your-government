@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useQuery } from '../utils/hooks.js';
-import { getChatLink } from '../utils/links.js';
+import { getStoryLink } from '../utils/links.js';
 import {
   getUnlockedChapters,
   setUnlockedChapters,
@@ -25,7 +25,7 @@ export const TriggerChat = ({ story, chat }) => {
   }, []);
 
   const onClick = () => {
-    return history.push(getChatLink(story._id, chat._id, lang));
+    return history.push(getStoryLink(story._id, lang));
   };
 
   return (
