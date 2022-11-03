@@ -114,6 +114,11 @@ export const StoryChats = ({ story, character }) => {
           />
         ))}
       </div>
+      <div className={styles.bottomContainer}>
+        <div className={styles.euLogo}>
+          <img src={`/eu/euposlogo_${lang}.png`} alt="" />
+        </div>
+      </div>
     </div>
   );
 };
