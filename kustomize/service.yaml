@@ -1,10 +1,10 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: stopyourgovernment-nginx
+  name: camria-game-nginx
 spec:
   selector:
-    app: stopyourgovernment
+    app: camria-game
   ports:
     - protocol: TCP
       port: 80

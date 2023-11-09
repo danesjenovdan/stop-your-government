@@ -2,7 +2,7 @@
 
 sudo docker login rg.fr-par.scw.cloud/djnd -u nologin -p $SCW_SECRET_TOKEN
 
-# BUILD AND PUBLISH STOP YOUR GOVERNMENT
-sudo docker build -f Dockerfile -t stopyourgovernment:latest .
-sudo docker tag stopyourgovernment:latest rg.fr-par.scw.cloud/djnd/stopyourgovernment:latest
-sudo docker push rg.fr-par.scw.cloud/djnd/stopyourgovernment:latest
+# BUILD AND PUBLISH CAMRIA GAME
+sudo docker build -f Dockerfile -t camria-game:latest .
+sudo docker tag camria-game:latest rg.fr-par.scw.cloud/djnd/camria-game:latest
+sudo docker push rg.fr-par.scw.cloud/djnd/camria-game:latest

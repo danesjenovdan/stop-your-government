@@ -1,9 +1,9 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: stopyourgovernment-pvc
+  name: camria-game-pvc
   labels:
-    app: stopyourgovernment
+    app: camria-game
   annotations:
     pv.beta.kubernetes.io/gid: "1000"
 spec:

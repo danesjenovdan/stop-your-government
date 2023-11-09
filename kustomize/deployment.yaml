@@ -1,28 +1,28 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: stopyourgovernment-deployment
+  name: camria-game-deployment
   labels:
-    app: stopyourgovernment
+    app: camria-game
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: stopyourgovernment
+      app: camria-game
   template:
     metadata:
       labels:
-        app: stopyourgovernment
+        app: camria-game
     spec:
       securityContext:
         fsGroup: 1000
       volumes:
-        - name: stopyourgovernment-persistent-storage
+        - name: camria-game-persistent-storage
           persistentVolumeClaim:
-            claimName: stopyourgovernment-pvc
+            claimName: camria-game-pvc
       containers:
-        - name: stopyourgovernment-nginx
-          image: stopyourgovernment
+        - name: camria-game-nginx
+          image: camria-game
           ports:
             - name: http
               containerPort: 80
