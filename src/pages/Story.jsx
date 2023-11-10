@@ -20,7 +20,8 @@ export const Story = () => {
   const storyId = query.get('id');
   const lang = query.get('lang');
   const CHARS = characters[lang];
-  const character = CHARS.find((c) => c.storyId === storyId);
+  // const character = CHARS.find((c) => c.storyId === storyId);
+  const character = CHARS[0];
   const { loading, error, data: story } = useStoryJson(storyId);
 
   const chatId = query.get('chat');

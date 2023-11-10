@@ -75,7 +75,8 @@ export const Intro = ({ lang }) => {
   const onSelectClick = () => {
     deleteStoredVariables();
     deleteUnlockedChapters();
-    const chatLink = getStoryLink(selectedCharacter.storyId, lang);
+    // const chatLink = getStoryLink(selectedCharacter.storyId, lang);
+    const chatLink = getStoryLink('6548aea711622f51d8869475', lang);
     history.push(chatLink);
   };
 
