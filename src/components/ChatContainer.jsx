@@ -3,11 +3,11 @@ import { useHistory } from 'react-router-dom';
 import { useQuery } from '../utils/hooks.js';
 import { Button } from './Button.jsx';
 import { ChatMessages } from './ChatMessages.jsx';
-import stopSign from '../assets/img/stop-sign-pole-bird.png';
+// import stopSign from '../assets/img/stop-sign-pole-bird.png';
 import styles from './ChatContainer.module.scss';
 import { getStoryLink } from '../utils/links.js';
 
-export const ChatContainer = ({ story, character, chat }) => {
+export const ChatContainer = ({ story, /* character, */ chat }) => {
   const history = useHistory();
   const query = useQuery();
   const lang = query.get('lang');
@@ -34,13 +34,13 @@ export const ChatContainer = ({ story, character, chat }) => {
           </Button>
           <div className={styles.character}>
             <div className={styles.name}>
-              <div>{character.name}</div>
-              <div className={styles.theme}>{character.theme}</div>
+              {/* <div>{character.name}</div> */}
+              <div className={styles.theme}>{chat.title}</div>
             </div>
           </div>
-          <div className={styles.image}>
+          {/* <div className={styles.image}>
             <img src={stopSign} alt="" />
-          </div>
+          </div> */}
         </div>
       </div>
       <ChatMessages story={story} chat={chat} />

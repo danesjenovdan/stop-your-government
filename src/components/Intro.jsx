@@ -1,7 +1,7 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { useSpring } from 'react-spring';
+import React from 'react';
+// import { useRef, useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import classNames from 'classnames';
+// import classNames from 'classnames';
 import { Button } from './Button.jsx';
 import styles from './Intro.module.scss';
 import { getStoryLink } from '../utils/links.js';
@@ -9,66 +9,47 @@ import {
   deleteStoredVariables,
   deleteUnlockedChapters,
 } from '../utils/variables.js';
-import {
-  CHARACTERS,
-  CHARACTERS_HRV,
-  CHARACTERS_SRP,
-} from '../utils/character-stories.js';
+// import {
+//   CHARACTERS,
+//   CHARACTERS_HRV,
+//   CHARACTERS_SRP,
+// } from '../utils/character-stories.js';
 
-const characters = {
-  slv: CHARACTERS,
-  hrv: CHARACTERS_HRV,
-  srp: CHARACTERS_SRP,
-};
+// const characters = {
+//   slv: CHARACTERS,
+//   hrv: CHARACTERS_HRV,
+//   srp: CHARACTERS_SRP,
+// };
 
-const selectText = {
-  slv: 'IZBERI',
-  hrv: 'ODABERI',
-  srp: 'IZABERI',
-};
+// const selectText = {
+//   slv: 'IZBERI',
+//   hrv: 'ODABERI',
+//   srp: 'IZABERI',
+// };
 
-const titleText = {
-  slv: 'Izberi zgodbo',
-  hrv: 'Odaberite priču',
-  srp: 'Izaberite priču',
-};
+// const titleText = {
+//   slv: 'Izberi zgodbo',
+//   hrv: 'Odaberite priču',
+//   srp: 'Izaberite priču',
+// };
 
 export const Intro = ({ lang }) => {
   const history = useHistory();
-  const scrollerRef = useRef();
-  const CHARS = characters[lang];
-  const SELECT_TEXT = selectText[lang];
-  const TITLE_TEXT = titleText[lang];
-  const [selectedCharacter, setSelectedCharacter] = useState(CHARS[0]);
+  // const CHARS = characters[lang];
+  // const SELECT_TEXT = selectText[lang];
+  const SELECT_TEXT = 'Začni';
+  // const TITLE_TEXT = titleText[lang];
+  // const [selectedCharacter, setSelectedCharacter] = useState(CHARS[0]);
 
-  const currentCharacterIndex = CHARS.indexOf(selectedCharacter);
-  const getNextCharacterIndex =
-    (dir = 1) =>
-    () => {
-      return (currentCharacterIndex + dir + CHARS.length) % CHARS.length;
-    };
-
-  const [, springScroll] = useSpring(() => ({
-    y: 0,
-    onChange: ({ value }) => {
-      scrollerRef.current.scrollTo(0, value.y);
-    },
-    config: {
-      duration: 1500,
-      easing: (t) => (1 - Math.cos(Math.PI * t)) / 2,
-    },
-  }));
-
-  useEffect(() => {
-    setTimeout(() => {
-      const scroller = scrollerRef.current;
-      const scroll = scroller.scrollHeight - scroller.clientHeight;
-      springScroll.start({ y: scroll });
-    }, 1500);
-  }, []);
+  // const currentCharacterIndex = CHARS.indexOf(selectedCharacter);
+  // const getNextCharacterIndex =
+  //   (dir = 1) =>
+  //   () => {
+  //     return (currentCharacterIndex + dir + CHARS.length) % CHARS.length;
+  //   };
 
   const width = 2560;
-  const height = 6146;
+  const height = 3642;
 
   const ratio = (height / width) * 100;
 
@@ -80,18 +61,18 @@ export const Intro = ({ lang }) => {
     history.push(chatLink);
   };
 
-  const selectNextCharacter =
-    (dir = 1) =>
-    () => {
-      setSelectedCharacter(CHARS[getNextCharacterIndex(dir)()]);
-    };
+  // const selectNextCharacter =
+  //   (dir = 1) =>
+  //   () => {
+  //     setSelectedCharacter(CHARS[getNextCharacterIndex(dir)()]);
+  //   };
 
   return (
-    <div className={styles.introContainer} ref={scrollerRef}>
+    <div className={styles.introContainer}>
       <div className={styles.introHeight} style={{ paddingTop: `${ratio}%` }}>
         <div className={styles.intro}>
           <div className={styles.charactersWrapper}>
-            <div className={styles.characters}>
+            {/* <div className={styles.characters}>
               {((character) => (
                 <div className={styles.character}>
                   <img
@@ -120,11 +101,11 @@ export const Intro = ({ lang }) => {
                   />
                 </div>
               ))(CHARS[getNextCharacterIndex(1)()])}
-            </div>
+            </div> */}
           </div>
           <div className={styles.buttons}>
-            <div className={styles.title}>{TITLE_TEXT}</div>
-            <div className={styles.character}>
+            {/* <div className={styles.title}>{TITLE_TEXT}</div> */}
+            {/* <div className={styles.character}>
               <Button
                 className={styles.arrow}
                 onClick={selectNextCharacter(-1)}
@@ -154,7 +135,7 @@ export const Intro = ({ lang }) => {
                   />
                 </svg>
               </Button>
-            </div>
+            </div> */}
             <Button
               variant="gold"
               className={styles.selectButton}

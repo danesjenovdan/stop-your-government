@@ -5,9 +5,10 @@
   margin-right: -$gutter;
   display: flex;
   flex-direction: column;
-  background-color: #6d5821;
+  background-color: #178fcc;
   height: 100vh;
   overflow: hidden;
+  justify-content: center;
 
   .introHeight {
     height: 0;
@@ -16,7 +17,7 @@
     .intro {
       position: absolute;
       inset: 0;
-      background-image: url('../assets/img/intro/intro-1.png');
+      background-image: url('../assets/img/intro/intro-carmia.png');
       background-position: top center;
       background-size: 100%;
       background-repeat: no-repeat;
@@ -48,7 +49,8 @@
         position: relative;
         z-index: 2;
         margin: $gutter;
-        background-color: $body-bg;
+        margin-bottom: 15%;
+        // background-color: $body-bg;
         border-radius: 2.5rem;
         font-family: 'Grandstander', cursive;
         text-align: center;
