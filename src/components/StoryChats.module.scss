@@ -7,7 +7,7 @@
   flex-direction: column;
   flex: 1;
   background-image: linear-gradient(to bottom, #132b52 0%, #fff8 100%),
-    url('../assets/img/map/map-1.png');
+    url('../assets/img/intro/intro-carmia.png');
   background-position: center;
   background-size: auto 110%;
   background-repeat: no-repeat;
@@ -54,12 +54,14 @@
       text-align: center;
       font-size: 1.75rem;
       font-weight: 700;
-      line-height: 1;
+      line-height: 1.2;
       color: #fff;
 
       .theme {
-        font-size: 1rem;
-        color: #8dc6f4;
+        font-size: 1.25rem;
+        color: #fff;
+        max-width: 75%;
+        margin-inline: auto;
       }
     }
   }
@@ -129,6 +131,18 @@
         color: #10284f;
       }
 
+      .title {
+        position: relative;
+        z-index: 1;
+        font-family: 'Grandstander', cursive;
+        font-size: 2rem;
+        font-weight: 700;
+        color: #10284f;
+        text-shadow: 0 0 6px #fff, 0 0 6px #fff, 2px 2px 6px #fff,
+          -2px -2px 6px #fff, -2px 2px 6px #fff, 2px -2px 6px #fff,
+          2px 0 6px #fff, -2px 0 6px #fff, 0 2px 6px #fff, 0 -2px 6px #fff;
+      }
+
       .completedIcon {
         position: absolute;
         right: 2rem;
@@ -160,11 +174,13 @@
     bottom: 0;
     left: 0;
     right: 0;
+    background-color: #fff;
+    display: flex;
+    flex-wrap: wrap;
 
     .euLogo {
       width: min-content;
-      height: 3.5rem;
-      background-color: #fff;
+      height: 3rem;
       margin: 0 auto 0.5rem;
       padding: 0.45rem 0.45rem 0.45rem 0.45rem;
 
@@ -172,6 +188,14 @@
         display: block;
         height: 100%;
       }
+    }
+
+    .disclaimer {
+      width: 100%;
+      padding: 0.5rem;
+      font-size: 0.75rem;
+      color: #000;
+      text-align: center;
     }
   }
 }
