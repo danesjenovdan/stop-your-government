@@ -82,7 +82,12 @@ export const StoryChats = ({ story /* character */ }) => {
   // };
 
   return (
-    <div className={styles.storyChats}>
+    <div
+      className={classNames(styles.storyChats, {
+        [styles.storyChatsSl]: lang === 'slv',
+        [styles.storyChatsEn]: lang === 'eng',
+      })}
+    >
       {/* <div className={styles.glow} />
       <div className={styles.image}>
         <img src={stopSign} alt="" />
@@ -91,7 +96,9 @@ export const StoryChats = ({ story /* character */ }) => {
         <div className={styles.name}>
           {/* <div>{character.name}</div> */}
           <div className={styles.theme}>
-            Reši situacije in ugotovi kakšna je tvoja moškost.
+            {lang === 'slv'
+              ? 'Reši situacije in ugotovi kakšna je tvoja moškost.'
+              : 'Solve situations and find out your masculinity type.'}
           </div>
         </div>
       </div>
@@ -122,15 +129,46 @@ export const StoryChats = ({ story /* character */ }) => {
           <img src="/carmia/carmia_logo.png" alt="" />
         </div>
         <div className={styles.euLogo}>
-          <img src={`/eu/euposlogo_${lang}.png`} alt="" />
+          <img src="/eu/euposlogo_slv.png" alt="" />
         </div>
         <div className={styles.euLogo}>
           <img src="/carmia/mi-logo-sl.png" alt="" />
         </div>
         <div className={styles.disclaimer}>
-          Vsebina igre predstavlja stališča projektne skupine CaRMiA in je njena
-          izključna odgovornost. Evropska komisija ne prevzema odgovornosti za
-          morebitno uporabo informacij, ki jih vsebuje.
+          {lang === 'slv'
+            ? `Vsebina igre predstavlja stališča projektne skupine CaRMiA in je njena
+               izključna odgovornost. Evropska komisija ne prevzema odgovornosti za
+               morebitno uporabo informacij, ki jih vsebuje.`
+            : `The content of this game represents the views of the CaRMiA project
+               team only and is its sole responsibility. The European Commission does
+               not accept any responsibility for the use that may be made of the
+               information it contains.`}
+        </div>
+        <div className={styles.disclaimer}>
+          {lang === 'slv' ? (
+            <div>
+              <div>Idejna zasnova: Majda Hrženjak</div>
+              <div>Besedilo: Žiga Kuhel</div>
+              <div>
+                Prevod in jezikovni pregled: Polona Mesec, Andrew Paul Tomlin
+              </div>
+              <div>Ilustracije: Jernej Žumer</div>
+              <div>Tehnična izvedba: Danes je nov dan</div>
+              <div>Produkcijska ekipa: Jasna Babič, Leja Markelj</div>
+            </div>
+          ) : (
+            <div>
+              <div>Concept: Majda Hrženjak</div>
+              <div>Text: Žiga Kuhel</div>
+              <div>
+                Translation and language editing: Polona Mesec, Andrew Paul
+                Tomlin
+              </div>
+              <div>Illustrations: Jernej Žumer</div>
+              <div>Digital development: Danes je nov dan</div>
+              <div>Production team: Jasna Babič, Leja Markelj</div>
+            </div>
+          )}
         </div>
       </div>
     </div>

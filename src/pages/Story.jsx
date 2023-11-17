@@ -3,25 +3,25 @@ import { useQuery, useStoryJson } from '../utils/hooks.js';
 import { ChatContainer } from '../components/ChatContainer.jsx';
 import { StoryChats } from '../components/StoryChats.jsx';
 import { VariablesDebug } from '../components/VariablesDebug.jsx';
-import {
-  CHARACTERS,
-  CHARACTERS_HRV,
-  CHARACTERS_SRP,
-} from '../utils/character-stories.js';
+// import {
+//   CHARACTERS,
+//   CHARACTERS_HRV,
+//   CHARACTERS_SRP,
+// } from '../utils/character-stories.js';
 
-const characters = {
-  slv: CHARACTERS,
-  hrv: CHARACTERS_HRV,
-  srp: CHARACTERS_SRP,
-};
+// const characters = {
+//   slv: CHARACTERS,
+//   hrv: CHARACTERS_HRV,
+//   srp: CHARACTERS_SRP,
+// };
 
 export const Story = () => {
   const query = useQuery();
   const storyId = query.get('id');
-  const lang = query.get('lang');
-  const CHARS = characters[lang];
+  // const lang = query.get('lang');
+  // const CHARS = characters[lang];
   // const character = CHARS.find((c) => c.storyId === storyId);
-  const character = CHARS[0];
+  const character = null;
   const { loading, error, data: story } = useStoryJson(storyId);
 
   const chatId = query.get('chat');

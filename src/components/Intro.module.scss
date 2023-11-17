@@ -18,13 +18,20 @@
     .intro {
       position: absolute;
       inset: 0;
-      background-image: url('../assets/img/intro/intro-carmia-sl.png');
       background-position: top center;
       background-size: 100%;
       background-repeat: no-repeat;
       display: flex;
       flex-direction: column;
       justify-content: flex-end;
+
+      &.introSl {
+        background-image: url('../assets/img/intro/intro-carmia-sl.png');
+      }
+
+      &.introEn {
+        background-image: url('../assets/img/intro/intro-carmia-en.png');
+      }
 
       .charactersWrapper {
         position: relative;
