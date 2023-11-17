@@ -17,7 +17,7 @@ export const App = () => (
         <Route path="/story">
           <Story />
         </Route>
-        <Route path="/en" exact>
+        <Route path="/en/" exact>
           <Home lang="eng" />
         </Route>
         <Route path="/" exact>
