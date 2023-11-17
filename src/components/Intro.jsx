@@ -55,8 +55,8 @@ export const Intro = ({ lang }) => {
   const ratio = (height / width) * 100;
 
   const onSelectClick = () => {
-    deleteStoredVariables();
-    deleteUnlockedChapters();
+    // deleteStoredVariables();
+    // deleteUnlockedChapters();
     // const chatLink = getStoryLink(selectedCharacter.storyId, lang);
     const chatLink =
       lang === 'slv'
