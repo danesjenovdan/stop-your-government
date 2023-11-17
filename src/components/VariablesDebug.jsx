@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import classNames from 'classnames';
 import {
+  deleteCompletedChapters,
   deleteStoredVariables,
+  deleteUnlockedChapters,
   getStoredVariables,
 } from '../utils/variables.js';
 import styles from './VariablesDebug.module.scss';
@@ -12,6 +14,8 @@ export const VariablesDebug = () => {
 
   const onDeleteClick = () => {
     deleteStoredVariables();
+    deleteUnlockedChapters();
+    deleteCompletedChapters();
   };
 
   const onCollapsedClick = () => {
