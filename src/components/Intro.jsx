@@ -1,4 +1,5 @@
 import React from 'react';
+import classNames from 'classnames';
 // import { useRef, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 // import classNames from 'classnames';
@@ -37,7 +38,7 @@ export const Intro = ({ lang }) => {
   const history = useHistory();
   // const CHARS = characters[lang];
   // const SELECT_TEXT = selectText[lang];
-  const SELECT_TEXT = 'Začni';
+  const SELECT_TEXT = lang === 'slv' ? 'Začni' : 'Start';
   // const TITLE_TEXT = titleText[lang];
   // const [selectedCharacter, setSelectedCharacter] = useState(CHARS[0]);
 
@@ -57,7 +58,10 @@ export const Intro = ({ lang }) => {
     deleteStoredVariables();
     deleteUnlockedChapters();
     // const chatLink = getStoryLink(selectedCharacter.storyId, lang);
-    const chatLink = getStoryLink('6548aea711622f51d8869475', lang);
+    const chatLink =
+      lang === 'slv'
+        ? getStoryLink('6548aea711622f51d8869475', lang)
+        : getStoryLink('65521d6111622f51d8faeac6', lang);
     history.push(chatLink);
   };
 
@@ -70,7 +74,12 @@ export const Intro = ({ lang }) => {
   return (
     <div className={styles.introContainer}>
       <div className={styles.introHeight} style={{ paddingTop: `${ratio}%` }}>
-        <div className={styles.intro}>
+        <div
+          className={classNames(styles.intro, {
+            [styles.introSl]: lang === 'slv',
+            [styles.introEn]: lang === 'eng',
+          })}
+        >
           <div className={styles.charactersWrapper}>
             {/* <div className={styles.characters}>
               {((character) => (

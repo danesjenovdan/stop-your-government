@@ -6,12 +6,20 @@
   display: flex;
   flex-direction: column;
   flex: 1;
-  background-image: linear-gradient(to bottom, #132b52 0%, #fff8 100%),
-    url('../assets/img/intro/intro-carmia.png');
   background-position: center;
   background-size: auto 110%;
   background-repeat: no-repeat;
-  padding-bottom: 15rem;
+  padding-bottom: 20rem;
+
+  &.storyChatsSl {
+    background-image: linear-gradient(to bottom, #132b52 0%, #fff8 100%),
+      url('../assets/img/intro/intro-carmia-sl.png');
+  }
+
+  &.storyChatsEn {
+    background-image: linear-gradient(to bottom, #132b52 0%, #fff8 100%),
+      url('../assets/img/intro/intro-carmia-en.png');
+  }
 
   .glow {
     position: absolute;

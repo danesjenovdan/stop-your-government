@@ -17,11 +17,8 @@ export const App = () => (
         <Route path="/story">
           <Story />
         </Route>
-        <Route path="/hr" exact>
-          <Home lang="hrv" />
-        </Route>
-        <Route path="/sr" exact>
-          <Home lang="srp" />
+        <Route path="/en/" exact>
+          <Home lang="eng" />
         </Route>
         <Route path="/" exact>
           <Home lang="slv" />
