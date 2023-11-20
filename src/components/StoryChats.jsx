@@ -61,7 +61,7 @@ export const StoryChats = ({ story /* character */ }) => {
 
   const [unlockedStoryChapters, setUnlockedStoryChapters] = useState([]);
   const [completedStoryChapters, setCompletedStoryChapters] = useState([]);
-  const mainChat = story.chats.find((c) => c.isMainChat);
+  const mainChat = story.chats.find((c) => c.isMainChat) || story.chats[0];
 
   useEffect(() => {
     const unlockedChapters = getUnlockedChapters();

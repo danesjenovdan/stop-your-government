@@ -7,6 +7,7 @@ import { Button } from './Button.jsx';
 import styles from './Intro.module.scss';
 import { getStoryLink } from '../utils/links.js';
 import {
+  deleteCompletedChapters,
   deleteStoredVariables,
   deleteUnlockedChapters,
 } from '../utils/variables.js';
@@ -55,8 +56,9 @@ export const Intro = ({ lang }) => {
   const ratio = (height / width) * 100;
 
   const onSelectClick = () => {
-    // deleteStoredVariables();
-    // deleteUnlockedChapters();
+    deleteStoredVariables();
+    deleteUnlockedChapters();
+    deleteCompletedChapters();
     // const chatLink = getStoryLink(selectedCharacter.storyId, lang);
     const chatLink =
       lang === 'slv'
