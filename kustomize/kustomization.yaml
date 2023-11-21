@@ -9,4 +9,4 @@ resources:
 images:
   - name: camria-game
     newName: rg.fr-par.scw.cloud/djnd/camria-game
-    newTag: 'd9b531b2a05921e58fb984108c308c618ef7e063'
+    newTag: 'd2d27b440b8242862cebb088467bd9b999b26baf'
