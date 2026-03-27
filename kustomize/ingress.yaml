@@ -5,14 +5,15 @@ metadata:
   annotations:
     cert-manager.io/cluster-issuer: "letsencrypt-production"
 spec:
-  ingressClassName: nginx
+  ingressClassName: traefik
   tls:
     - hosts:
         - stopyourgovernment.djnd.si
+        - stopyourgovernment.danesjenovdan.si
       secretName: stopyourgovernment-nginx-tls
   rules:
     - host: stopyourgovernment.djnd.si
-      http:
+      http: &http_paths
         paths:
           - path: /
             pathType: Prefix
@@ -21,3 +22,5 @@ spec:
                 name: stopyourgovernment-nginx
                 port:
                   number: 80
+    - host: stopyourgovernment.danesjenovdan.si
+      http: *http_paths
